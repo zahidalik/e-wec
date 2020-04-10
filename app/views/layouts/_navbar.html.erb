@@ -1,0 +1,25 @@
+<div class="ui inverted small menu">
+  <%= link_to root_path, class: "item" do %>
+  <i class="university icon"></i> Home
+  <% end %>
+  <a class="item">
+    Messages
+  </a>
+  <div class="right menu">
+    <div class="ui dropdown item">
+      Language <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item">English</a>
+        <a class="item">Russian</a>
+        <a class="item">Spanish</a>
+      </div>
+    </div>
+    <div class="item">
+      <div class="small ui buttons">
+        <%= link_to 'Tutor', "#", class: "ui primary button" %>
+        <div class="or"></div>
+        <%= link_to 'Student', "#", class: "ui positive button" %>
+      </div>
+    </div>
+  </div>
+</div>

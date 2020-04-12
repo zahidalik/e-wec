@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get 'login-tutor', to: 'sessions_tutors#new'
   get 'login-student', to: 'sessions_students#new'
   post 'signin-tutor', to: 'sessions_tutors#create'
+  post 'signin-student', to: 'sessions_students#create'
 end

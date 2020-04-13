@@ -1,0 +1,13 @@
+<div class="ui middle aligned divided list">
+  <% @tutors.each do |tutor| %>
+    <div class="item">
+      <div class="right floated content">
+        <%= link_to "Show", tutor_path(tutor), class: "ui button" %>
+      </div>
+      <i class="user orange icon"></i>
+      <div class="content">
+        <%= tutor.name %>
+      </div>
+    </div>
+  <% end %>
+</div>

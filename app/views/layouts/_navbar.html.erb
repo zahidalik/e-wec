@@ -3,25 +3,43 @@
     <%= link_to root_path, class: "item" do %>
     <i class="university icon"></i> Home
     <% end %>
-    <a class="item">
-      Messages
-    </a>
-    <div class="right menu">
-      <div class="ui dropdown item">
-        Language <i class="dropdown icon"></i>
-        <div class="menu">
-          <a class="item">English</a>
-          <a class="item">Russian</a>
-          <a class="item">Spanish</a>
+    <% if current_tutor %>
+      <%= link_to tutor_path(current_tutor), class: "item" do %>
+        <i class="settings icon"></i> My profile
+      <% end %>
+      <div class="right menu">
+        <div class="ui dropdown item">
+          <%= current_tutor.name %> <i class="dropdown icon"></i>
+          <div class="menu">
+            <%= link_to edit_tutor_path(current_tutor), class: "item" do %>
+              <i class="edit icon"></i> Edit profile
+            <% end %>
+            <%= link_to tutor_path(current_tutor), class: "item" do %>
+              <i class="desktop icon"></i> My dashboard
+            <% end %>
+            <% if current_tutor.admin? %>
+              <%= link_to tutors_path, class: "item" do %>
+                <i class="users icon"></i> All Tutors
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="item">
+          <div class="small button">
+            <%= link_to 'Logout', logout_tutor_path, class: "ui negative button", method: :delete %>
+          </div>
         </div>
       </div>
-      <div class="item">
-        <div class="small ui buttons">
-          <%= link_to 'Tutor', login_tutor_path, class: "ui primary button" %>
-          <div class="or"></div>
-          <%= link_to 'Student', login_student_path, class: "ui positive button" %>
+      <% else %>
+        <div class="right menu">
+          <div class="item">
+            <div class="small ui buttons">
+              <%= link_to 'Tutor', login_tutor_path, class: "ui primary button" %>
+              <div class="or"></div>
+              <%= link_to 'Student', login_student_path, class: "ui positive button" %>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>

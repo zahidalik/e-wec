@@ -30,3 +30,22 @@
     </div>
   </div>
 </div>
+
+<div class="ui left demo vertical inverted sidebar labeled icon menu">
+  <div class="item">
+    <i class="user icon"></i>
+    Name: <%= @tutor.name %>
+  </div>
+  <div class="item">
+    <i class="phone icon"></i>
+    Contact Number: <%= @tutor.contact %>
+  </div>
+  <div class="item">
+    <i class="address card outline icon"></i>
+    Address: <%= @tutor.address %>
+  </div>
+  <%= link_to edit_tutor_path(@tutor), class: "item" do %>
+    <i class="edit icon"></i> Click to edit your profile
+  <% end %>
+
+</div>

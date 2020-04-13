@@ -1,7 +1,7 @@
 class TutorsController < ApplicationController
-  before_action :set_tutor, only: [:show, :edit, :update]
+  before_action :set_tutor, only: [:show, :edit, :update, :destroy]
   before_action :require_user
-  before_action :set_admin, only: [:index, :destroy]
+  before_action :require_admin, only: [:index, :new, :create, :destroy]
 
   def index
     @tutors = Tutor.all
@@ -37,7 +37,9 @@ class TutorsController < ApplicationController
   end
 
   def destroy
-    # code
+    @tutor.destroy
+    flash[:success] = "Tutor record has been deleted"
+    redirect_to tutors_url
   end
 
   private
@@ -46,7 +48,7 @@ class TutorsController < ApplicationController
     @tutor = Tutor.find(params[:id])
   end
 
-  def set_admin
+  def require_admin
     if !current_tutor.admin?
       flash[:error] = "You are not authorised to do this action"
       redirect_to root_path

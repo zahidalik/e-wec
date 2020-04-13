@@ -1,8 +1,12 @@
-<div class="ui middle aligned divided list">
+<div class="ui middle aligned divided huge list">
   <% @tutors.each do |tutor| %>
     <div class="item">
       <div class="right floated content">
-        <%= link_to "Show", tutor_path(tutor), class: "ui button" %>
+        <%= link_to "Delete", tutor_path(tutor), method: :delete,
+                    class: "ui negative button", data: { confirm: "Are you sure?"} %>
+      </div>
+      <div class="right floated content">
+        <%= link_to "Show", tutor_path(tutor), class: "ui primary button" %>
       </div>
       <i class="user orange icon"></i>
       <div class="content">

@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get 'login-tutor', to: 'sessions_tutors#new'
   delete 'logout-tutor', to: 'sessions_tutors#destroy'
   get 'login-student', to: 'sessions_students#new'
+  delete 'logout-student', to: 'sessions_students#destroy'
   post 'signin-tutor', to: 'sessions_tutors#create'
   post 'signin-student', to: 'sessions_students#create'
   resources :tutors
+  resources :students
 end

@@ -1,0 +1,67 @@
+<h2 class="ui center aligned icon header">
+  <i class="circular orange desktop icon"></i>
+  <%= @student.name %> You will see the questions from your tutor and you will
+  answer back in the answers sheet given.
+</h2>
+
+<div class="ui placeholder segment">
+  <div class="ui two column stackable center aligned grid">
+    <div class="ui vertical divider">Or</div>
+    <div class="middle aligned row">
+      <div class="column">
+        <div class="ui icon header">
+          <i class="violet building outline icon"></i>
+          Classes
+        </div>
+        <div class="field">
+          <div class="ui primary button">
+            class
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui icon header">
+          <i class="purple users icon"></i>
+          Students
+        </div>
+        <div class="ui primary button">
+          student
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui left demo vertical inverted sidebar labeled icon menu">
+  <div class="item">
+    <i class="user icon"></i>
+    Name: <%= @student.name %>
+  </div>
+  <div class="item">
+    <i class="phone icon"></i>
+    Contact Number: <%= @student.contact %>
+  </div>
+  <div class="item">
+    <i class="address card outline icon"></i>
+    Address: <%= @student.address %>
+  </div>
+  <div class="item">
+    <i class="user icon"></i>
+    Gender: <%= @student.gender %>
+  </div>
+  <div class="item">
+    <i class="male icon"></i>
+    Father's Name: <%= @student.father_name %>
+  </div>
+  <div class="item">
+    <i class="female icon"></i>
+    Mother's Name: <%= @student.mother_name %>
+  </div>
+  <div class="item">
+    <i class="user icon"></i>
+    Guardian: <%= @student.guardian_name %>
+  </div>
+  <%= link_to edit_student_path(@student), class: "item" do %>
+    <i class="edit icon"></i> Click to edit your profile
+  <% end %>
+</div>

@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_action :require_user
+  before_action :correct_student, only: [:edit, :update]
   before_action :require_admin, only: [:new, :create, :destroy]
 
   def index
@@ -46,6 +47,18 @@ class StudentsController < ApplicationController
 
   def set_student
     @student = Student.find(params[:id])
+  end
+
+  def require_admin
+    if !current_tutor.admin?
+      flash[:error] = "You are not authorised to do this action"
+      redirect_to root_path
+    end
+  end
+
+  def correct_student
+    @student = Student.find(params[:id])
+    redirect_to root_path unless current_student?(@student)
   end
 
   def student_params

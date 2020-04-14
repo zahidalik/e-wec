@@ -7,7 +7,7 @@ $(document).on('turbolinks:load', function() {
     $(this).closest('.message').transition('fade');
   });
 
-  $('.ui.labeled.icon.sidebar')
-  .sidebar('toggle')
-;
+  $('.ui.labeled.icon.sidebar').sidebar('toggle');
+
+  $('.ui.checkbox').checkbox();
 })

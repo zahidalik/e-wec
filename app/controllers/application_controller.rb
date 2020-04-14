@@ -5,8 +5,16 @@ class ApplicationController < ActionController::Base
     @current_tutor ||= Tutor.find(session[:tutor_id]) if session[:tutor_id]
   end
 
+  def current_tutor?(tutor)
+    tutor == current_tutor
+  end
+
   def current_student
     @current_student ||= Student.find(session[:student_id]) if session[:student_id]
+  end
+
+  def current_student?(student)
+    student == current_student
   end
 
   def tutor_logged_in?
@@ -30,7 +38,7 @@ class ApplicationController < ActionController::Base
   #     redirect_to root_path
   #   end
   # end
-  
+
   def require_admin
     if !current_tutor.admin?
       flash[:error] = "You are not authorised to do this action"

@@ -42,6 +42,12 @@
         <i class="lock icon"></i>
       </div>
     </div>
+    <div class="field">
+     <div class="ui toggle checkbox">
+       <%= f.check_box :admin, class: "hidden" %>
+       <%= f.label :admin %>
+     </div>
+    </div>
     <%= f.submit class: "ui green submit button" %>
   <% end %>
 </div>

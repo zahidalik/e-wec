@@ -1,6 +1,7 @@
 class TutorsController < ApplicationController
   before_action :set_tutor, only: [:show, :edit, :update, :destroy]
   before_action :require_user
+  before_action :correct_tutor, only: [:edit, :update]
   before_action :require_admin, only: [:index, :new, :create, :destroy]
 
   def index
@@ -55,7 +56,12 @@ class TutorsController < ApplicationController
     end
   end
 
+  def correct_tutor
+    @tutor = Tutor.find(params[:id])
+    redirect_to root_path unless current_tutor?(@tutor)
+  end
+
   def tutor_params
-    params.require(:tutor).permit(:name, :contact, :address, :password)
+    params.require(:tutor).permit(:name, :contact, :address, :admin, :password)
   end
 end

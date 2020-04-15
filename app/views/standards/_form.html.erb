@@ -1,0 +1,26 @@
+<% if @standard.errors.any? %>
+  <div class="ui error message">
+    <i class="close icon"></i>
+    <div class="header">
+      <%= pluralize(@standard.errors.count, "error") %> prohibited Class from being added:
+    </div>
+    <ul class="list">
+      <% @standard.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="ui piled segment">
+  <%= form_for @standard, html: { class: "ui form", role: 'form'} do |f| %>
+    <div class="field">
+      <%= f.label :name, "Class Name" %>
+      <div class="ui left icon input">
+        <%= f.text_field :name, placeholder: "Class" %>
+        <i class="building icon"></i>
+      </div>
+    </div>
+    <%= f.submit class: "ui green submit button" %>
+  <% end %>
+</div>

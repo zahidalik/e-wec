@@ -1,0 +1,10 @@
+<div class="ui middle aligned huge animated list">
+  <% @standards.each do |standard| %>
+  <div class="item">
+    <i class="purple building outline icon"></i>
+    <div class="content">
+      <%= link_to "#{standard.name}", standard, class: "header" %>
+    </div>
+  </div>
+  <% end %>
+</div>

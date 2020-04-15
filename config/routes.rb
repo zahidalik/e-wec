@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   post 'signin-student', to: 'sessions_students#create'
   resources :tutors
   resources :students
+  resources :standards
 end

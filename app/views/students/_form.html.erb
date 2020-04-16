@@ -70,6 +70,11 @@
         <i class="lock icon"></i>
       </div>
     </div>
+    <div class="field">
+      <%= f.collection_check_boxes :standard_ids, Standard.all, :id, :name do |cb| %>
+        <%= cb.label(class: "ui toggle checkbox") {cb.check_box(class: "hidden") + cb.text} %>
+      <% end %>
+    </div>
     <%= f.submit class: "ui green submit button" %>
   <% end %>
 </div>

@@ -21,6 +21,7 @@ class StandardsController < ApplicationController
 
   def show
     @standard = Standard.find(params[:id])
+    @standard_students = @standard.students
   end
 
 

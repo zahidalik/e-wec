@@ -1,10 +1,15 @@
-<div class="ui middle aligned huge animated list">
+<div class="ui middle aligned divided huge list">
   <% @standards.each do |standard| %>
-  <div class="item">
-    <i class="purple building outline icon"></i>
-    <div class="content">
-      <%= link_to "#{standard.name}", standard, class: "header" %>
+    <div class="item">
+      <% if current_tutor.admin? %>
+        <div class="right floated content">
+          <%= link_to "Edit", edit_standard_path(standard), class: "ui primary button" %>
+        </div>
+      <% end %>
+      <i class="violet building outline icon"></i>
+      <div class="content">
+        <%= link_to "#{standard.name}", standard, class: "header" %>
+      </div>
     </div>
-  </div>
   <% end %>
 </div>

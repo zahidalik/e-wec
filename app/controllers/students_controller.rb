@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_action :require_user
   before_action :correct_student, only: [:edit, :update]
-  before_action :require_admin, only: [:new, :create, :destroy]
+  before_action :require_admin, only: [:index, :new, :create, :destroy]
 
   def index
     @students = Student.all
@@ -33,7 +33,7 @@ class StudentsController < ApplicationController
       flash[:success] = "The account was updated successfully"
       redirect_to @student
     else
-      render :new
+      render :edit
     end
   end
 
@@ -47,13 +47,6 @@ class StudentsController < ApplicationController
 
   def set_student
     @student = Student.find(params[:id])
-  end
-
-  def require_admin
-    if !current_tutor.admin?
-      flash[:error] = "You are not authorised to do this action"
-      redirect_to root_path
-    end
   end
 
   def correct_student

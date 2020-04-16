@@ -4,29 +4,22 @@
 </h2>
 
 <div class="ui placeholder segment">
-  <div class="ui two column stackable center aligned grid">
-    <div class="ui vertical divider">Or</div>
-    <div class="middle aligned row">
-      <div class="column">
-        <div class="ui icon header">
-          <i class="violet building outline icon"></i>
-        </div>
-        <div class="field">
-          <%= link_to "All classes", standards_path, class: "ui primary button" %>
-        </div>
-      </div>
-      <div class="column">
-        <div class="ui icon header">
-          <i class="purple users icon"></i>
-          Students
-        </div>
-        <div class="ui primary button">
-          student
-        </div>
-      </div>
-    </div>
+  <div class="ui icon header">
+    <i class="violet building outline icon"></i>
+    All Classes
   </div>
+   <%= link_to "Show", standards_url, class: "ui primary button" %>
 </div>
+
+<% if current_tutor.admin? %>
+  <div class="ui placeholder segment">
+    <div class="ui icon header">
+      <i class="violet building outline icon"></i>
+      All Students
+    </div>
+     <%= link_to "Show", students_url, class: "ui primary button" %>
+  </div>
+<% end %>
 
 <div class="ui left demo vertical inverted sidebar labeled icon menu">
   <div class="item">

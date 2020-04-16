@@ -1,7 +1,6 @@
 <h2 class="ui center aligned icon header">
   <i class="circular orange desktop icon"></i>
-  <%= @student.name %> you will see the questions from your tutor and you will
-  answer back in the answers sheet given.
+  <%= @student.name %>. Class: <%= @student.standards.last.name %>
 </h2>
 
 <div class="ui placeholder segment">
@@ -61,7 +60,9 @@
     <i class="user icon"></i>
     Guardian: <%= @student.guardian_name %>
   </div>
-  <%= link_to edit_student_path(@student), class: "item" do %>
-    <i class="edit icon"></i> Click to edit your profile
+  <% if student_logged_in? %>
+    <%= link_to edit_student_path(@student), class: "item" do %>
+      <i class="edit icon"></i> Click to edit your profile
+    <% end %>
   <% end %>
 </div>

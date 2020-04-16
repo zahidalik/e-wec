@@ -40,9 +40,14 @@ class ApplicationController < ActionController::Base
   # end
 
   def require_admin
-    if !current_tutor.admin?
+    if session[:student_id]
       flash[:error] = "You are not authorised to do this action"
       redirect_to root_path
+    elsif session[:tutor_id]
+      if !current_tutor.admin?
+        flash[:error] = "You are not authorised to do this action"
+        redirect_to root_path
+      end
     end
   end
 

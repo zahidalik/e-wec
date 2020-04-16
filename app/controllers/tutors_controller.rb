@@ -49,13 +49,6 @@ class TutorsController < ApplicationController
     @tutor = Tutor.find(params[:id])
   end
 
-  def require_admin
-    if !current_tutor.admin?
-      flash[:error] = "You are not authorised to do this action"
-      redirect_to root_path
-    end
-  end
-
   def correct_tutor
     @tutor = Tutor.find(params[:id])
     redirect_to root_path unless current_tutor?(@tutor)

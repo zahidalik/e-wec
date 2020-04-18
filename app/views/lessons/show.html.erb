@@ -1,0 +1,30 @@
+<div>
+  <button class="fluid ui teal button">Topic: <%= @lesson.topic %></button>
+</div>
+<div>
+  <button class="fluid ui teal button">Subject: <%= @lesson.subject %></button>
+</div>
+<% if @lesson.description %>
+  <div>
+    <button class="fluid ui teal button">Description: <%= @lesson.description %></button>
+  </div>
+<% end %>
+<div>
+  <button class="fluid ui teal button">Date: <%= @lesson.created_at %></button>
+</div>
+
+<div class="ui center aligned segment">
+  <%= @lesson.body %>
+</div>
+
+<% if tutor_logged_in? %>
+  <div class>
+    <%= link_to "Edit Activity", edit_lesson_path(@lesson), class: "fluid ui primary button" %>
+  </div>
+  <% if current_tutor.admin? %>
+    <div>
+      <%= link_to "Delete Activity", lesson_path(@lesson), method: :delete,
+                  data: { confirm: "Are you sure"}, class: "fluid ui negative button" %>
+    </div>
+  <% end %>
+<% end %>

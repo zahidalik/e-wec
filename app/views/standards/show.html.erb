@@ -18,3 +18,21 @@
   </div>
   <% end %>
 </div>
+
+<div class="ui segment">
+  <div class="ui two column very relaxed grid">
+    <div class="column">
+      <% @standard.lessons.each do |lesson| %>
+        <ul class="ui large list">
+          <li><%= link_to lesson.subject, lesson_path(lesson)%></li>
+        </ul>
+      <% end %>
+    </div>
+    <div class="center aligned column">
+      <%= link_to "New Activity", new_lesson_path, class: "ui primary button" %>
+    </div>
+  </div>
+  <div class="ui vertical divider">
+    and
+  </div>
+</div>

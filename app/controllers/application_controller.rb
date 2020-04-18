@@ -25,12 +25,12 @@ class ApplicationController < ActionController::Base
     !!current_student
   end
 
-  # def require_tutor
-  #   if !tutor_logged_in?
-  #     flash[:error] = "You must be logged in for performing this action"
-  #     redirect_to root_path
-  #   end
-  # end
+  def require_tutor
+    if !tutor_logged_in?
+      flash[:error] = "You must be logged in as tutor for performing this action"
+      redirect_to root_path
+    end
+  end
   #
   # def require_student
   #   if !student_logged_in?

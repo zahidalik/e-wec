@@ -17,6 +17,12 @@
   <%= @lesson.body %>
 </div>
 
+<% if @lesson.vedio.present? %>
+  <div class="ui center aligned segment">
+    <%= video_tag(url_for(@lesson.vedio), controls: '') %>
+  </div>
+<% end %>
+
 <% if tutor_logged_in? %>
   <div class>
     <%= link_to "Edit Activity", edit_lesson_path(@lesson), class: "fluid ui primary button" %>

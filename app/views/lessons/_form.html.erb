@@ -39,5 +39,9 @@
     <%= f.label :body, "Activity" %>
     <%= f.rich_text_area :body %>
   </div>
+  <div class="ui very relaxed segment">
+    <%= f.label :vedio, "Activity related vedio" %>
+    <%= f.file_field :vedio %>
+  </div>
     <%= f.submit class: "ui green button" %>
 <% end %>

@@ -31,13 +31,13 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
-  #
-  # def require_student
-  #   if !student_logged_in?
-  #     flash[:error] = "You must be logged in for performing this action"
-  #     redirect_to root_path
-  #   end
-  # end
+
+  def require_student
+    if !student_logged_in?
+      flash[:error] = "You must be logged in as a student for performing this action"
+      redirect_to root_path
+    end
+  end
 
   def require_admin
     if session[:student_id]

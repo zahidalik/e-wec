@@ -1,0 +1,19 @@
+<div>
+  <button class="fluid ui teal button">Topic: <%= @answer.topic %></button>
+</div>
+<div>
+  <button class="fluid ui teal button">Subject: <%= @answer.subject %></button>
+</div>
+<div>
+  <button class="fluid ui teal button">Date: <%= @answer.created_at %></button>
+</div>
+
+<div class="ui center aligned segment">
+  <%= @answer.answer %>
+</div>
+
+<% if student_logged_in? %>
+  <div class>
+    <%= link_to "Edit Answer", edit_answer_path(@answer), class: "fluid ui primary button" %>
+  </div>
+<% end %>

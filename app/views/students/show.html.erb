@@ -1,35 +1,36 @@
 <h2 class="ui center aligned icon header">
   <i class="circular orange desktop icon"></i>
-  <%= @student.name %>. Class: <%= @student.standards.last.name %>
+  <%= @student.name %>&apos;s Dashboard
+  <div>
+    Class: <%= @student.standards.last.name %>
+  </div>
 </h2>
 
-<div class="ui placeholder segment">
-  <div class="ui two column stackable center aligned grid">
-    <div class="ui vertical divider">Or</div>
-    <div class="middle aligned row">
-      <div class="column">
-        <div class="ui icon header">
-          <i class="violet building outline icon"></i>
-          Classes
-        </div>
-        <div class="field">
-          <div class="ui primary button">
-            class
-          </div>
-        </div>
-      </div>
-      <div class="column">
-        <div class="ui icon header">
-          <i class="purple users icon"></i>
-          Students
-        </div>
-        <div class="ui primary button">
-          student
-        </div>
-      </div>
+<div class="ui segment">
+  <div class="ui two column very relaxed grid">
+    <div class="column">
+      <% @student_standard.lessons.each do |lesson| %>
+        <ul class="ui large list">
+          <li><%= link_to lesson.subject, lesson_path(lesson)%></li>
+        </ul>
+      <% end %>
+    </div>
+    <div class="column">
+      <% @student.answers.each do |answer| %>
+        <ul class="ui large list">
+          <li><%= link_to answer.subject, answer_path(answer)%></li>
+        </ul>
+      <% end %>
     </div>
   </div>
+  <div class="ui vertical divider">
+    and
+  </div>
 </div>
+
+<% if student_logged_in? %>
+  <%= link_to "New Answer", new_answer_path, class: "ui primary button" %>
+<% end %>
 
 <div class="ui left demo vertical inverted sidebar labeled icon menu">
   <div class="item">

@@ -1,18 +1,18 @@
-<% if @lesson.errors.any? %>
+<% if @answer.errors.any? %>
   <div class="ui error message">
     <i class="close icon"></i>
     <div class="header">
-      <%= pluralize(@lesson.errors.count, "error") %> prohibited Activity from being added:
+      <%= pluralize(@answer.errors.count, "error") %> prohibited Activity from being added:
     </div>
     <ul class="list">
-      <% @lesson.errors.full_messages.each do |message| %>
+      <% @answer.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
     </ul>
   </div>
 <% end %>
 
-<%= form_for @lesson, html: { class: "ui form", role: 'form'} do |f| %>
+<%= form_for @answer, html: { class: "ui form", role: 'form'} do |f| %>
   <div class="ui piled segment">
     <div class="field">
       <%= f.label :subject, "Subject" %>
@@ -28,20 +28,10 @@
         <i class="file icon"></i>
       </div>
     </div>
-    <div class="field">
-      <%= f.label :description, "Description" %>
-      <div class="ui left icon input">
-        <%= f.text_area :description, placeholder: "Write a description" %>
-      </div>
-    </div>
   </div>
   <div class="ui very padded segment">
-    <%= f.label :body, "Activity" %>
-    <%= f.rich_text_area :body %>
-  </div>
-  <div class="ui very relaxed segment">
-    <%= f.label :vedio, "Activity related vedio" %>
-    <%= f.file_field :vedio %>
+    <%= f.label :answer, "Answer" %>
+    <%= f.rich_text_area :answer %>
   </div>
     <%= f.submit class: "ui green button" %>
 <% end %>

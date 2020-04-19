@@ -9,6 +9,7 @@ class StudentsController < ApplicationController
   end
 
   def show
+    @student_standard = @student.standards.last
   end
 
   def new

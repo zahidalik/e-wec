@@ -37,7 +37,7 @@ class LessonsController < ApplicationController
 
   def destroy
     @lesson.delete
-    flash[:success] = "Activity delted succcessfully"
+    flash[:success] = "Activity deleted succcessfully"
     redirect_to standards_url
   end
 
@@ -48,6 +48,6 @@ class LessonsController < ApplicationController
   end
 
   def lesson_params
-    params.require(:lesson).permit(:subject, :topic, :description, :body, :vedio)
+    params.require(:lesson).permit(:subject, :topic, :description, :body, :video)
   end
 end

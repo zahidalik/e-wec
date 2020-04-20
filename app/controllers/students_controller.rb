@@ -39,6 +39,7 @@ class StudentsController < ApplicationController
   end
 
   def destroy
+    StandardStudent.where(student_id: @student.id).first.delete
     @student.destroy
     flash[:success] = "Student's record has been deleted"
     redirect_to students_url

@@ -9,6 +9,7 @@
 <div class="ui segment">
   <div class="ui two column very relaxed grid">
     <div class="column">
+      <strong class="ui center aligned header">List of all the activities</strong>
       <% @student_standard.lessons.each do |lesson| %>
         <ul class="ui large list">
           <li><%= link_to lesson.subject, lesson_path(lesson)%></li>
@@ -16,6 +17,7 @@
       <% end %>
     </div>
     <div class="column">
+      <strong class="ui center aligned header">List of all the answers</strong>
       <% @student.answers.each do |answer| %>
         <ul class="ui large list">
           <li><%= link_to answer.subject, answer_path(answer)%></li>
@@ -29,7 +31,9 @@
 </div>
 
 <% if student_logged_in? %>
-  <%= link_to "New Answer", new_answer_path, class: "ui primary button" %>
+  <div class="ui center aligned header">
+    <%= link_to "New Answer", new_answer_path, class: "ui primary button" %>
+  </div>
 <% end %>
 
 <div class="ui left demo vertical inverted sidebar labeled icon menu">

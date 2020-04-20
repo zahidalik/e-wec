@@ -31,7 +31,7 @@
     <div class="field">
       <%= f.label :description, "Description" %>
       <div class="ui left icon input">
-        <%= f.text_area :description, placeholder: "Write a description" %>
+        <%= f.text_area :description, placeholder: "Write a description", rows: 2 %>
       </div>
     </div>
   </div>
@@ -40,8 +40,8 @@
     <%= f.rich_text_area :body %>
   </div>
   <div class="ui very relaxed segment">
-    <%= f.label :vedio, "Activity related vedio" %>
-    <%= f.file_field :vedio %>
+    <%= f.label :video, "Activity related vedio" %>
+    <%= f.file_field :video %>
   </div>
     <%= f.submit class: "ui green button" %>
 <% end %>

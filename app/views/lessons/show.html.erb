@@ -13,13 +13,13 @@
   <button class="fluid ui teal button">Date: <%= @lesson.created_at %></button>
 </div>
 
-<div class="ui center aligned segment">
+<div class="ui segment">
   <%= @lesson.body %>
 </div>
 
-<% if @lesson.vedio.present? %>
+<% if @lesson.video.present? %>
   <div class="ui center aligned segment">
-    <%= video_tag(url_for(@lesson.vedio), controls: '') %>
+    <%= video_tag(url_for(@lesson.video), style: 'width:600px; height:400px', controls: '') %>
   </div>
 <% end %>
 

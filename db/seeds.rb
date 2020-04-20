@@ -5,4 +5,5 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Tutor.create!(name: 'Zahid', contact: '0623956661', address: 'Kibaha', password: 'zahid5', admin: true)
+admin = Tutor.create!(name: 'Zahid', contact: '0623956661', address: 'Kibaha', password: 'zahid5', admin: true)
+admin.toggle!(:admin)

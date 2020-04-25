@@ -40,8 +40,12 @@
     <%= f.rich_text_area :body %>
   </div>
   <div class="ui very relaxed segment">
-    <%= f.label :video, "Activity related vedio" %>
+    <%= f.label :video, "Activity related video" %>
     <%= f.file_field :video %>
+  </div>
+  <div class="ui very relaxed segment">
+    <%= f.label :audio, "Activity related audio file" %>
+    <%= f.file_field :audio %>
   </div>
     <%= f.submit class: "ui green button" %>
 <% end %>

@@ -22,8 +22,8 @@
 <div class="ui segment">
   <div class="ui two column very relaxed grid">
     <div class="column">
+      <strong class="ui center aligned header">List of all the activities</strong>
       <% @standard.lessons.each do |lesson| %>
-        <strong class="ui center aligned header">List of all the activities</strong> 
         <ul class="ui large list">
           <li><%= link_to lesson.subject, lesson_path(lesson)%></li>
         </ul>

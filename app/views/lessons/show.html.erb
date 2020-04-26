@@ -2,15 +2,15 @@
   <button class="fluid ui teal button">Topic: <%= @lesson.topic %></button>
 </div>
 <div>
-  <button class="fluid ui teal button">Subject: <%= @lesson.subject %></button>
+  <button class="fluid ui green button">Subject: <%= @lesson.subject %></button>
 </div>
 <% if @lesson.description %>
   <div>
-    <button class="fluid ui teal button">Description: <%= @lesson.description %></button>
+    <button class="fluid ui brown button">Description: <%= @lesson.description %></button>
   </div>
 <% end %>
 <div>
-  <button class="fluid ui teal button">Date: <%= @lesson.created_at %></button>
+  <button class="fluid ui orange button">Date: <%= @lesson.created_at %></button>
 </div>
 
 <div class="ui segment">
@@ -18,13 +18,13 @@
 </div>
 
 <% if @lesson.video.present? %>
-  <div class="ui center aligned segment">
+  <div class="ui center aligned inverted segment">
     <%= video_tag(url_for(@lesson.video), style: 'width:600px; height:400px', controls: '') %>
   </div>
 <% end %>
 
 <% if @lesson.audio.present? %>
-  <div class="ui center aligned segment">
+  <div class="ui center aligned inverted segment">
     <%= audio_tag(url_for(@lesson.audio), controls: '') %>
   </div>
 <% end %>

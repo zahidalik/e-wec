@@ -9,6 +9,7 @@ class TutorsController < ApplicationController
   end
 
   def show
+    @tutor_standards = @tutor.standards
   end
 
   def new

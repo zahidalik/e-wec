@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  tutor: one
   subject: one
-  standard: one
 
 two:
+  tutor: two
   subject: two
-  standard: two

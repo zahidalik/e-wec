@@ -2,7 +2,8 @@ class Standard < ApplicationRecord
   validates :name, presence: true
   has_many :standard_students
   has_many :students, through: :standard_students
-  has_many :tutors, through: :standard_students
+  has_many :standard_tutors
+  has_many :tutors, through: :standard_tutors
   has_many :lessons
   has_many :standard_subjects
   has_many :subjects, through: :standard_subjects

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_28_081426) do
+ActiveRecord::Schema.define(version: 2020_04_28_092115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,33 +66,45 @@ ActiveRecord::Schema.define(version: 2020_04_28_081426) do
   end
 
   create_table "standard_students", force: :cascade do |t|
-    t.bigint "standard_id", null: false
     t.bigint "student_id", null: false
+    t.bigint "standard_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "tutor_id", null: false
     t.index ["standard_id"], name: "index_standard_students_on_standard_id"
     t.index ["student_id"], name: "index_standard_students_on_student_id"
-    t.index ["tutor_id"], name: "index_standard_students_on_tutor_id"
   end
 
   create_table "standard_subjects", force: :cascade do |t|
-    t.bigint "standard_id", null: false
     t.bigint "subject_id", null: false
+    t.bigint "standard_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "tutor_id", null: false
-    t.bigint "student_id", null: false
     t.index ["standard_id"], name: "index_standard_subjects_on_standard_id"
-    t.index ["student_id"], name: "index_standard_subjects_on_student_id"
     t.index ["subject_id"], name: "index_standard_subjects_on_subject_id"
-    t.index ["tutor_id"], name: "index_standard_subjects_on_tutor_id"
+  end
+
+  create_table "standard_tutors", force: :cascade do |t|
+    t.bigint "tutor_id", null: false
+    t.bigint "standard_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["standard_id"], name: "index_standard_tutors_on_standard_id"
+    t.index ["tutor_id"], name: "index_standard_tutors_on_tutor_id"
   end
 
   create_table "standards", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "student_subjects", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "subject_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["student_id"], name: "index_student_subjects_on_student_id"
+    t.index ["subject_id"], name: "index_student_subjects_on_subject_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -114,6 +126,15 @@ ActiveRecord::Schema.define(version: 2020_04_28_081426) do
     t.string "name"
   end
 
+  create_table "tutor_subjects", force: :cascade do |t|
+    t.bigint "tutor_id", null: false
+    t.bigint "subject_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["subject_id"], name: "index_tutor_subjects_on_subject_id"
+    t.index ["tutor_id"], name: "index_tutor_subjects_on_tutor_id"
+  end
+
   create_table "tutors", force: :cascade do |t|
     t.string "name"
     t.string "contact"
@@ -129,9 +150,12 @@ ActiveRecord::Schema.define(version: 2020_04_28_081426) do
   add_foreign_key "lessons", "standards"
   add_foreign_key "standard_students", "standards"
   add_foreign_key "standard_students", "students"
-  add_foreign_key "standard_students", "tutors"
   add_foreign_key "standard_subjects", "standards"
-  add_foreign_key "standard_subjects", "students"
   add_foreign_key "standard_subjects", "subjects"
-  add_foreign_key "standard_subjects", "tutors"
+  add_foreign_key "standard_tutors", "standards"
+  add_foreign_key "standard_tutors", "tutors"
+  add_foreign_key "student_subjects", "students"
+  add_foreign_key "student_subjects", "subjects"
+  add_foreign_key "tutor_subjects", "subjects"
+  add_foreign_key "tutor_subjects", "tutors"
 end

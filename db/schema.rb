@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_28_092115) do
+ActiveRecord::Schema.define(version: 2020_04_29_184944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,37 +55,18 @@ ActiveRecord::Schema.define(version: 2020_04_28_092115) do
     t.index ["student_id"], name: "index_answers_on_student_id"
   end
 
-  create_table "lessons", force: :cascade do |t|
-    t.string "subject"
-    t.string "topic"
-    t.text "description"
-    t.bigint "standard_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["standard_id"], name: "index_lessons_on_standard_id"
-  end
-
   create_table "standard_students", force: :cascade do |t|
-    t.bigint "student_id", null: false
     t.bigint "standard_id", null: false
+    t.bigint "student_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["standard_id"], name: "index_standard_students_on_standard_id"
     t.index ["student_id"], name: "index_standard_students_on_student_id"
   end
 
-  create_table "standard_subjects", force: :cascade do |t|
-    t.bigint "subject_id", null: false
-    t.bigint "standard_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["standard_id"], name: "index_standard_subjects_on_standard_id"
-    t.index ["subject_id"], name: "index_standard_subjects_on_subject_id"
-  end
-
   create_table "standard_tutors", force: :cascade do |t|
-    t.bigint "tutor_id", null: false
     t.bigint "standard_id", null: false
+    t.bigint "tutor_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["standard_id"], name: "index_standard_tutors_on_standard_id"
@@ -96,15 +77,6 @@ ActiveRecord::Schema.define(version: 2020_04_28_092115) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "student_subjects", force: :cascade do |t|
-    t.bigint "student_id", null: false
-    t.bigint "subject_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["student_id"], name: "index_student_subjects_on_student_id"
-    t.index ["subject_id"], name: "index_student_subjects_on_subject_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -121,18 +93,13 @@ ActiveRecord::Schema.define(version: 2020_04_28_092115) do
   end
 
   create_table "subjects", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.string "name"
-  end
-
-  create_table "tutor_subjects", force: :cascade do |t|
     t.bigint "tutor_id", null: false
-    t.bigint "subject_id", null: false
+    t.bigint "standard_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["subject_id"], name: "index_tutor_subjects_on_subject_id"
-    t.index ["tutor_id"], name: "index_tutor_subjects_on_tutor_id"
+    t.index ["standard_id"], name: "index_subjects_on_standard_id"
+    t.index ["tutor_id"], name: "index_subjects_on_tutor_id"
   end
 
   create_table "tutors", force: :cascade do |t|
@@ -147,15 +114,10 @@ ActiveRecord::Schema.define(version: 2020_04_28_092115) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "students"
-  add_foreign_key "lessons", "standards"
   add_foreign_key "standard_students", "standards"
   add_foreign_key "standard_students", "students"
-  add_foreign_key "standard_subjects", "standards"
-  add_foreign_key "standard_subjects", "subjects"
   add_foreign_key "standard_tutors", "standards"
   add_foreign_key "standard_tutors", "tutors"
-  add_foreign_key "student_subjects", "students"
-  add_foreign_key "student_subjects", "subjects"
-  add_foreign_key "tutor_subjects", "subjects"
-  add_foreign_key "tutor_subjects", "tutors"
+  add_foreign_key "subjects", "standards"
+  add_foreign_key "subjects", "tutors"
 end

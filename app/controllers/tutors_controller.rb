@@ -18,6 +18,7 @@ class TutorsController < ApplicationController
 
   def create
     @tutor = Tutor.new(tutor_params)
+    byebug
     if @tutor.save
       flash[:success] = "Tutor was successfully added"
       redirect_to @tutor
@@ -39,6 +40,7 @@ class TutorsController < ApplicationController
   end
 
   def destroy
+    StandardTutor.where(tutor_id: @tutor.id).first.destroy
     @tutor.destroy
     flash[:success] = "Tutor record has been deleted"
     redirect_to tutors_url
@@ -56,6 +58,7 @@ class TutorsController < ApplicationController
   end
 
   def tutor_params
-    params.require(:tutor).permit(:name, :contact, :address, :admin, :password)
+    params.require(:tutor).permit(:name, :contact, :address, :admin, :password,
+                                  standard_ids: [])
   end
 end

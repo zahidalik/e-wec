@@ -3,23 +3,28 @@
   <%= @tutor.name %>&apos;s Dashboard
 </h2>
 
-<div class="ui placeholder segment">
-  <div class="ui icon header">
-    <i class="violet building outline icon"></i>
-    All Classes
-  </div>
-   <%= link_to "Show", standards_url, class: "ui primary button" %>
+<div class="ui top attached tabular menu">
+  <a class="active item" data-tab="first">Classes</a>
+  <a class="item" data-tab="second">Subjects</a>
+  <a class="item" data-tab="third">ADD A TAB</a>
 </div>
-
-<% if current_tutor.admin? %>
-  <div class="ui placeholder segment">
-    <div class="ui icon header">
-      <i class="violet building outline icon"></i>
-      All Students
-    </div>
-     <%= link_to "Show", students_url, class: "ui primary button" %>
-  </div>
-<% end %>
+<div class="ui bottom attached active tab segment" data-tab="first">
+  <% @tutor_standards.each do |standard| %>
+    <ol class="ui large celled list">
+      <li><%= link_to standard.name, standard_path(standard) %></li>
+    </ol>
+  <% end %>
+</div>
+<div class="ui bottom attached tab segment" data-tab="second">
+  <% @tutor_subjects.each do |subject| %>
+    <ol class="ui large celled list">
+      <li><%= link_to subject.name, subject_path(subject) %> (<%= subject.standard.name %>)</li>
+    </ol>
+  <% end %>
+</div>
+<div class="ui bottom attached tab segment" data-tab="third">
+  Third
+</div>
 
 <div class="ui left demo vertical inverted sidebar labeled icon menu">
   <div class="item">

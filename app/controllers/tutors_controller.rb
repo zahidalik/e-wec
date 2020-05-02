@@ -10,6 +10,7 @@ class TutorsController < ApplicationController
 
   def show
     @tutor_standards = @tutor.standards
+    @tutor_subjects = @tutor.subjects
   end
 
   def new
@@ -18,10 +19,10 @@ class TutorsController < ApplicationController
 
   def create
     @tutor = Tutor.new(tutor_params)
-    byebug
     if @tutor.save
+      session[:new_tutor_id] = @tutor.id
       flash[:success] = "Tutor was successfully added"
-      redirect_to @tutor
+      redirect_to new_subject_path
     else
       render :new
     end
@@ -58,7 +59,6 @@ class TutorsController < ApplicationController
   end
 
   def tutor_params
-    params.require(:tutor).permit(:name, :contact, :address, :admin, :password,
-                                  standard_ids: [])
+    params.require(:tutor).permit(:name, :contact, :address, :admin, :password)
   end
 end

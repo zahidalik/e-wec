@@ -4,6 +4,7 @@ class Standard < ApplicationRecord
   has_many :standard_students
   has_many :students, through: :standard_students
   has_many :subjects
-  
+
   validates :name, presence: true
+  default_scope { order(name: :asc) }
 end

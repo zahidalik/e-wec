@@ -10,4 +10,6 @@ $(document).on('turbolinks:load', function() {
   $('.ui.labeled.icon.sidebar').sidebar('toggle');
 
   $('.ui.checkbox').checkbox();
+
+  $('.menu .item').tab();
 })

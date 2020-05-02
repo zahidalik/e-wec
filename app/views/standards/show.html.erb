@@ -8,6 +8,17 @@
   </h2>
 </div>
 
+<% if tutor_logged_in? %>
+  <div class="ui large segment">
+    <strong><%= current_tutor.name %></strong> you currently teach in this class the following subjects:
+    <% @standard_subjects.where(tutor_id: current_tutor.id).each do |subject| %>
+      <ul>
+        <li><%= subject.name %></li>
+      </ul>
+    <% end %>
+  </div>
+<% end %>
+
 <div class="ui middle aligned huge selection list">
   <% @standard_students.each do |standard_student| %>
   <div class="item">
@@ -17,23 +28,4 @@
     </div>
   </div>
   <% end %>
-</div>
-
-<div class="ui segment">
-  <div class="ui two column very relaxed grid">
-    <div class="column">
-      <strong class="ui center aligned header">List of all the activities</strong>
-      <% @standard.lessons.each do |lesson| %>
-        <ul class="ui large list">
-          <li><%= link_to lesson.subject, lesson_path(lesson)%></li>
-        </ul>
-      <% end %>
-    </div>
-    <div class="center aligned column">
-      <%= link_to "New Activity", new_lesson_path, class: "ui primary button" %>
-    </div>
-  </div>
-  <div class="ui vertical divider">
-    and
-  </div>
 </div>

@@ -1,0 +1,46 @@
+<h2 class="ui center aligned icon header">
+  <i class="building icon"></i>
+   Your Classrooms
+</h2>
+<% if current_tutor.admin? %>
+  <table class="ui celled table">
+    <thead>
+      <tr><th>Standard</th>
+      <th>Subject</th>
+      <th>Teacher</th>
+      <th>Actions</th>
+    </tr></thead>
+      <% @classrooms.each do |classroom| %>
+    <tbody>
+      <tr>
+        <td data-label="Standard"><%= link_to classroom.standard.name, standard_path("#{classroom.standard.id}") %></td>
+        <td data-label="Subject"><%= classroom.subject.name %></td>
+        <td data-label="Teacher"><%= classroom.tutor.name %></td>
+        <td data-label="Actions"><%= link_to "Add Acitivity", '#', class: "ui mini primary button" %>
+                                 <%= link_to "Add Exam", "#", class: "ui mini primary button" %></td>
+      </tr>
+    </tbody>
+      <% end %>
+  </table>
+  <%= link_to "Add a new classroom", new_classroom_path, class: "ui green button" %>
+<% else %>
+  <table class="ui celled table">
+    <thead>
+      <tr><th>Standard</th>
+      <th>Subject</th>
+      <th>Teacher</th>
+      <th>Actions</th>
+    </tr></thead>
+      <% @classrooms.where(tutor_id: current_tutor.id).each do |classroom| %>
+    <tbody>
+      <tr>
+        <td data-label="Standard"><%= link_to classroom.standard.name, standard_path("#{classroom.standard.id}") %></td>
+        <td data-label="Subject"><%= classroom.subject.name %></td>
+        <td data-label="Teacher"><%= classroom.tutor.name %></td>
+        <td data-label="Actions"><%= link_to "Add Acitivity", '#', class: "ui mini primary button" %>
+                                 <%= link_to "Add Exam", "#", class: "ui mini primary button" %></td>
+      </tr>
+    </tbody>
+      <% end %>
+  </table>
+<% end %>

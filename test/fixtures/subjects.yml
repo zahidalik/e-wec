@@ -2,10 +2,6 @@
 
 one:
   name: MyString
-  tutor: one
-  standard: one
 
 two:
   name: MyString
-  tutor: two
-  standard: two

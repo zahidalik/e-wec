@@ -1,0 +1,29 @@
+<% if @classroom.errors.any? %>
+  <div class="ui error message">
+    <i class="close icon"></i>
+    <div class="header">
+      <%= pluralize(@classroom.errors.count, "error") %> prohibited Classroom from being added:
+    </div>
+    <ul class="list">
+      <% @classroom.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="ui piled segment">
+  <%= form_for @classroom, html: { class: "ui form", role: 'form'} do |f| %>
+    <div class="field">
+      <%= collection_select(:tutor, :tutor_id, Tutor.all, :id, :name) %>
+    </div>
+    <div class="field">
+      <%= collection_select(:standard, :standard_id, Standard.all, :id, :name) %>
+    </div>
+    <div class="field">
+      <%= collection_select(:subject, :subject_id, Subject.all, :id, :name) %>
+    </div>
+
+    <%= f.submit class: "ui green submit button" %>
+  <% end %>
+</div>

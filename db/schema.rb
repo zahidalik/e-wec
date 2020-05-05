@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_184944) do
+ActiveRecord::Schema.define(version: 2020_05_04_065159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,17 @@ ActiveRecord::Schema.define(version: 2020_04_29_184944) do
     t.index ["student_id"], name: "index_answers_on_student_id"
   end
 
+  create_table "classrooms", force: :cascade do |t|
+    t.bigint "tutor_id", null: false
+    t.bigint "standard_id", null: false
+    t.bigint "subject_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["standard_id"], name: "index_classrooms_on_standard_id"
+    t.index ["subject_id"], name: "index_classrooms_on_subject_id"
+    t.index ["tutor_id"], name: "index_classrooms_on_tutor_id"
+  end
+
   create_table "standard_students", force: :cascade do |t|
     t.bigint "standard_id", null: false
     t.bigint "student_id", null: false
@@ -62,15 +73,6 @@ ActiveRecord::Schema.define(version: 2020_04_29_184944) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["standard_id"], name: "index_standard_students_on_standard_id"
     t.index ["student_id"], name: "index_standard_students_on_student_id"
-  end
-
-  create_table "standard_tutors", force: :cascade do |t|
-    t.bigint "standard_id", null: false
-    t.bigint "tutor_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["standard_id"], name: "index_standard_tutors_on_standard_id"
-    t.index ["tutor_id"], name: "index_standard_tutors_on_tutor_id"
   end
 
   create_table "standards", force: :cascade do |t|
@@ -94,12 +96,8 @@ ActiveRecord::Schema.define(version: 2020_04_29_184944) do
 
   create_table "subjects", force: :cascade do |t|
     t.string "name"
-    t.bigint "tutor_id", null: false
-    t.bigint "standard_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["standard_id"], name: "index_subjects_on_standard_id"
-    t.index ["tutor_id"], name: "index_subjects_on_tutor_id"
   end
 
   create_table "tutors", force: :cascade do |t|
@@ -114,10 +112,9 @@ ActiveRecord::Schema.define(version: 2020_04_29_184944) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "students"
+  add_foreign_key "classrooms", "standards"
+  add_foreign_key "classrooms", "subjects"
+  add_foreign_key "classrooms", "tutors"
   add_foreign_key "standard_students", "standards"
   add_foreign_key "standard_students", "students"
-  add_foreign_key "standard_tutors", "standards"
-  add_foreign_key "standard_tutors", "tutors"
-  add_foreign_key "subjects", "standards"
-  add_foreign_key "subjects", "tutors"
 end

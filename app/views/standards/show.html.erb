@@ -8,14 +8,20 @@
   </h2>
 </div>
 
-<% if tutor_logged_in? %>
-  <div class="ui large segment">
-    <strong><%= current_tutor.name %></strong> you currently teach in this class the following subjects:
-    <% @standard_subjects.where(tutor_id: current_tutor.id).each do |subject| %>
-      <ul>
-        <li><%= subject.name %></li>
-      </ul>
-    <% end %>
+<% if tutor_logged_in? && current_tutor.admin? %>
+<div class="ui segment">
+  <strong><%= current_tutor.name %></strong> you are admin, please refer
+  to your dashboard to perform different actions
+</div>
+<% end %>
+<% if tutor_logged_in? && !current_tutor.admin? %>
+  <div class="ui center aligned large segment">
+    <strong><%= current_tutor.name %></strong> please choose your subjects from the menu:
+    <div class="ui menu">
+      <% @standard_associations.where(tutor_id: current_tutor.id).each do |classroom| %>
+        <%= link_to classroom.subject.name, subject_path("#{classroom.subject.id}"), class: "item" %>
+    </div>
+  <% end %>
   </div>
 <% end %>
 

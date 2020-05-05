@@ -1,9 +1,9 @@
 class Standard < ApplicationRecord
-  has_many :standard_tutors
-  has_many :tutors, through: :standard_tutors
+  has_many :classrooms
+  has_many :tutors, through: :classrooms
+  has_many :subjects, through: :classrooms
   has_many :standard_students
   has_many :students, through: :standard_students
-  has_many :subjects
 
   validates :name, presence: true
   default_scope { order(name: :asc) }

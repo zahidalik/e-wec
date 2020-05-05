@@ -1,8 +1,8 @@
 class Tutor < ApplicationRecord
-  has_many :standard_tutors
-  has_many :standards, through: :standard_tutors
-  has_many :subjects
-  
+  has_many :classrooms
+  has_many :standards, through: :classrooms
+  has_many :subjects, through: :classrooms
+
   validates :name, :contact, presence: true
 
   default_scope { order(name: :asc) }

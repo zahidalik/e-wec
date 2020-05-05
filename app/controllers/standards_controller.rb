@@ -25,7 +25,7 @@ class StandardsController < ApplicationController
   def show
     @standard_students = @standard.students
     session[:standard_id] = @standard.id
-    @standard_subjects = @standard.subjects
+    @standard_associations = Classroom.where(standard_id: @standard.id)
   end
 
   def edit

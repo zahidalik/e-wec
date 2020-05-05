@@ -1,0 +1,27 @@
+<% if @subject.errors.any? %>
+  <div class="ui error message">
+    <i class="close icon"></i>
+    <div class="header">
+      <%= pluralize(@subject.errors.count, "error") %> prohibited Subject from being added:
+    </div>
+    <ul class="list">
+      <% @subject.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="ui piled segment">
+  <%= form_for @subject, html: { class: "ui form", role: 'form'} do |f| %>
+    <div class="field">
+      <%= f.label :name, "Subject Name" %>
+      <div class="ui left icon input">
+        <%= f.text_field :name, placeholder: "Name" %>
+        <i class="book icon"></i>
+      </div>
+    </div>
+    
+    <%= f.submit class: "ui green submit button" %>
+  <% end %>
+</div>

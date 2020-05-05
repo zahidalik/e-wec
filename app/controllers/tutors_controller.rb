@@ -9,8 +9,7 @@ class TutorsController < ApplicationController
   end
 
   def show
-    @tutor_standards = @tutor.standards
-    @tutor_subjects = @tutor.subjects
+    @tutor_associations = Classroom.where(tutor_id: @tutor.id)
   end
 
   def new
@@ -20,9 +19,8 @@ class TutorsController < ApplicationController
   def create
     @tutor = Tutor.new(tutor_params)
     if @tutor.save
-      session[:new_tutor_id] = @tutor.id
       flash[:success] = "Tutor was successfully added"
-      redirect_to new_subject_path
+      redirect_to tutor_path(current_tutor)
     else
       render :new
     end

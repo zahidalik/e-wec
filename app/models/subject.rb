@@ -1,7 +1,7 @@
 class Subject < ApplicationRecord
-  belongs_to :tutor
-  belongs_to :standard
+  has_many :classrooms
+  has_many :standards, through: :classrooms
+  has_many :tutors, through: :classrooms
 
   validates :name, presence: true
-  default_scope { order(name: :asc) }
 end

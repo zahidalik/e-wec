@@ -2,45 +2,105 @@
   <i class="circular orange desktop icon"></i>
   <%= @tutor.name %>&apos;s Dashboard
 </h2>
-
-<div class="ui top attached tabular menu">
-  <a class="active item" data-tab="first">Classes</a>
-  <a class="item" data-tab="second">Subjects</a>
-  <a class="item" data-tab="third">ADD A TAB</a>
-</div>
-<div class="ui bottom attached active tab segment" data-tab="first">
-  <% @tutor_standards.each do |standard| %>
-    <ol class="ui large celled list">
-      <li><%= link_to standard.name, standard_path(standard) %></li>
-    </ol>
-  <% end %>
-</div>
-<div class="ui bottom attached tab segment" data-tab="second">
-  <% @tutor_subjects.each do |subject| %>
-    <ol class="ui large celled list">
-      <li><%= link_to subject.name, subject_path(subject) %> (<%= subject.standard.name %>)</li>
-    </ol>
-  <% end %>
-</div>
-<div class="ui bottom attached tab segment" data-tab="third">
-  Third
-</div>
-
-<div class="ui left demo vertical inverted sidebar labeled icon menu">
-  <div class="item">
-    <i class="user icon"></i>
-    Name: <%= @tutor.name %>
+<div class="ui grid">
+  <div class="ui three wide column">
+    <div class="ui left vertical menu">
+      <div class="item">
+        <h3 class="ui orange header">Status</h3>
+      </div>
+      <% @tutor.standards.each do |standard| %>
+        <a class="item">
+          <%= standard.name %>
+          <div class="ui teal left pointing label"><%= standard.students.count %></div>
+        </a>
+      <% end %>
+    </div>
   </div>
-  <div class="item">
-    <i class="phone icon"></i>
-    Contact Number: <%= @tutor.contact %>
-  </div>
-  <div class="item">
-    <i class="address card outline icon"></i>
-    Address: <%= @tutor.address %>
-  </div>
-  <%= link_to edit_tutor_path(@tutor), class: "item" do %>
-    <i class="edit icon"></i> Click to edit your profile
+  <% if !current_tutor.admin? %>
+    <div class="ui nine wide column">
+      <div class="ui top attached tabular menu">
+        <a class="active item" data-tab="first">Classes</a>
+        <a class="item" data-tab="second">Subjects</a>
+        <a class="item" data-tab="third">Classrooms</a>
+      </div>
+      <div class="ui bottom attached active tab segment" data-tab="first">
+        <% @tutor_associations.each do |classroom| %>
+          <ol class="ui large celled list">
+            <li><%= link_to classroom.standard.name, standard_path("#{classroom.standard.id}") %></li>
+          </ol>
+        <% end %>
+      </div>
+      <div class="ui bottom attached tab segment" data-tab="second">
+        <% @tutor_associations.each do |classroom| %>
+          <ol class="ui large celled list">
+            <li><%= link_to classroom.subject.name, subject_path("#{classroom.subject.id}") %> (<%= classroom.standard.name %>)</li>
+          </ol>
+        <% end %>
+      </div>
+      <div class="ui bottom attached tab segment" data-tab="third">
+        You can create new activities, lessons, exams by visiting your classroom.
+        <%= link_to "Your Classroom(s)", classrooms_path %>
+      </div>
+    </div>
   <% end %>
-
+  <% if current_tutor.admin? %>
+    <div class="ui ten wide column">
+      <div class="ui fluid large vertical menu">
+        <a class="item">
+          <h3 class="ui center aligned teal header">
+            Actions
+          </h3>
+        </a>
+        <%= link_to tutors_path, class: "item" do %>
+          <i class="users icon"></i> All Teachers
+        <% end %>
+        <%= link_to students_path, class: "item" do %>
+          <i class="users icon"></i> All Students
+        <% end %>
+        <%= link_to '#', class: "item" do %>
+          <i class="book icon"></i> All Subjects
+        <% end %>
+        <%= link_to '#', class: "item" do %>
+          <i class="book icon"></i> All Standards
+        <% end %>
+        <%= link_to classrooms_path, class: "item" do %>
+          <i class="building icon"></i> All Classroom Relationships
+        <% end %>
+        <%= link_to '#', class: "item" do %>
+          <i class="clipboard icon"></i> All Activities (Teachers)
+        <% end %>
+        <%= link_to '#', class: "item" do %>
+          <i class="file outline icon"></i> All Exams
+        <% end %>
+        <%= link_to '#', class: "item" do %>
+          <i class="clipboard icon"></i> All Activities (Students)
+        <% end %>
+        <%= link_to new_tutor_path, class: "item" do %>
+          <i class="user plus icon"></i> Add New Teacher
+        <% end %>
+        <%= link_to new_student_path, class: "item" do %>
+          <i class="user plus icon"></i> Add New Student
+        <% end %>
+        <%= link_to new_student_path, class: "item" do %>
+          <i class="user plus icon"></i> Add New Standard
+        <% end %>
+        <%= link_to new_subject_path, class: "item" do %>
+          <i class="user plus icon"></i> Add New Subject
+        <% end %>
+        <%= link_to new_classroom_path, class: "item" do %>
+          <i class="user plus icon"></i> Add New Classroom Relationship
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <div class="ui three wide column">
+    <div class="ui right vertical menu">
+      <div class="item">
+        <h3 class="ui orange header">Profile</h3>
+      </div>
+      <a class="active brown item"><strong>Name: </strong><%= @tutor.name %></a>
+      <a class="item"><strong>Contact: </strong><%= @tutor.contact %></a>
+      <a class="item"><strong>Address: </strong><%= @tutor.address %></a>
+    </div>
+  </div>
 </div>

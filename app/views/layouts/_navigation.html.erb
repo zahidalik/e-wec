@@ -12,23 +12,6 @@
         <%= link_to tutor_path(current_tutor), class: "item" do %>
           <i class="desktop icon"></i> My dashboard
         <% end %>
-        <% if current_tutor.admin? %>
-          <%= link_to tutors_path, class: "item" do %>
-            <i class="users icon"></i> All Tutors
-          <% end %>
-          <%= link_to new_tutor_path, class: "item" do %>
-            <i class="user plus icon"></i> Add a new Tutor
-          <% end %>
-          <%= link_to students_path, class: "item" do %>
-            <i class="users icon"></i> All Students
-          <% end %>
-          <%= link_to new_student_path, class: "item" do %>
-            <i class="user plus icon"></i> Add a new Student
-          <% end %>
-          <%= link_to new_standard_path, class: "item" do %>
-            <i class="building outline icon"></i> Add a new Class
-          <% end %>
-        <% end %>
       </div>
     </div>
     <div class="item">

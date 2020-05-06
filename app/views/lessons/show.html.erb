@@ -1,20 +1,14 @@
-<div>
-  <button class="fluid ui teal button">Topic: <%= @lesson.topic %></button>
-</div>
-<div>
-  <button class="fluid ui green button">Subject: <%= @lesson.subject %></button>
-</div>
-<% if @lesson.description %>
-  <div>
-    <button class="fluid ui brown button">Description: <%= @lesson.description %></button>
-  </div>
-<% end %>
-<div>
-  <button class="fluid ui orange button">Date: <%= @lesson.created_at %></button>
+<div class="ui center aligned raised segment">
+  <button class="ui primary basic button">Tutor: <%= @lesson.classroom.tutor.name %></button>
+  <button class="ui primary basic button">Class: <%= @lesson.classroom.standard.name %></button>
+  <button class="ui teal basic button">Subject: <%= @lesson.classroom.subject.name %></button>
+  <button class="ui brown basic button">Topic: <%= @lesson.topic %></button>
+  <button class="ui primary basic button">Created: <%= @lesson.created_at.httpdate %></button>
+  <button class="ui primary basic button">Updated: <%= @lesson.updated_at.httpdate %></button>
 </div>
 
 <div class="ui segment">
-  <%= @lesson.body %>
+  <%= @lesson.lesson %>
 </div>
 
 <% if @lesson.video.present? %>
@@ -26,6 +20,12 @@
 <% if @lesson.audio.present? %>
   <div class="ui center aligned inverted segment">
     <%= audio_tag(url_for(@lesson.audio), controls: '') %>
+  </div>
+<% end %>
+
+<% if @lesson.file.present? %>
+  <div class="ui center aligned inverted segment">
+    <%= file_tag(url_for(@lesson.file), controls: '') %>
   </div>
 <% end %>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_065159) do
+ActiveRecord::Schema.define(version: 2020_05_05_171050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(version: 2020_05_04_065159) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "activities", force: :cascade do |t|
+    t.string "topic"
+    t.bigint "classroom_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["classroom_id"], name: "index_activities_on_classroom_id"
+  end
+
   create_table "answers", force: :cascade do |t|
     t.string "subject"
     t.string "topic"
@@ -64,6 +72,23 @@ ActiveRecord::Schema.define(version: 2020_05_04_065159) do
     t.index ["standard_id"], name: "index_classrooms_on_standard_id"
     t.index ["subject_id"], name: "index_classrooms_on_subject_id"
     t.index ["tutor_id"], name: "index_classrooms_on_tutor_id"
+  end
+
+  create_table "exams", force: :cascade do |t|
+    t.string "topic"
+    t.datetime "date"
+    t.bigint "classroom_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["classroom_id"], name: "index_exams_on_classroom_id"
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.string "topic"
+    t.bigint "classroom_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["classroom_id"], name: "index_lessons_on_classroom_id"
   end
 
   create_table "standard_students", force: :cascade do |t|
@@ -111,10 +136,13 @@ ActiveRecord::Schema.define(version: 2020_05_04_065159) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "activities", "classrooms"
   add_foreign_key "answers", "students"
   add_foreign_key "classrooms", "standards"
   add_foreign_key "classrooms", "subjects"
   add_foreign_key "classrooms", "tutors"
+  add_foreign_key "exams", "classrooms"
+  add_foreign_key "lessons", "classrooms"
   add_foreign_key "standard_students", "standards"
   add_foreign_key "standard_students", "students"
 end

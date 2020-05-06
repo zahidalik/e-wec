@@ -13,5 +13,7 @@ Rails.application.routes.draw do
   resources :subjects
   resources :classrooms
   resources :lessons
+  resources :activities
+  resources :exams
   resources :answers
 end

@@ -1,0 +1,83 @@
+<% if !current_tutor.admin? %>
+<h2 class="ui center aligned icon header">
+  <i class="orange th list icon"></i>
+   <%= current_tutor.name %> your subjects with details:
+</h2>
+
+  <table class="ui celled structured table">
+    <thead>
+      <tr>
+        <th rowspan="2">Name</th>
+        <th rowspan="2">Class</th>
+        <th rowspan="2">Students</th>
+        <th colspan="3">All Activities</th>
+      </tr>
+      <tr>
+        <th>Lessons</th>
+        <th>Activities</th>
+        <th>Tests</th>
+      </tr>
+    </thead>
+    <% @tutor_subjects.where(tutor_id: current_tutor.id).each do |tutor_subject| %>
+      <tbody>
+        <tr>
+          <td><%= link_to tutor_subject.subject.name, subject_path("#{tutor_subject.subject.id}") %></td>
+          <td><%= link_to tutor_subject.standard.name, standard_path("#{tutor_subject.standard.id}") %></td>
+          <td class="right aligned"><%= tutor_subject.standard.students.count %></td>
+          <td class="center aligned">
+            <%= tutor_subject.lessons.count %>
+          </td>
+          <td class="center aligned">
+            <%= tutor_subject.activities.count %>
+          </td>
+          <td class="center aligned">
+            <%= tutor_subject.exams.count %>
+          </td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+
+<% else %>
+
+<h2 class="ui center aligned icon header">
+  <i class="orange th list icon"></i>
+   <%= current_tutor.name %> All Subjects with details:
+</h2>
+
+  <table class="ui celled structured table">
+    <thead>
+      <tr>
+        <th rowspan="2">Tutor Name</th>
+        <th rowspan="2">Subject Name</th>
+        <th rowspan="2">Class</th>
+        <th rowspan="2">Students</th>
+        <th colspan="3">All Activities</th>
+      </tr>
+      <tr>
+        <th>Lessons</th>
+        <th>Activities</th>
+        <th>Tests</th>
+      </tr>
+    </thead>
+    <% @tutor_subjects.each do |tutor_subject| %>
+      <tbody>
+        <tr>
+          <td><%= link_to tutor_subject.tutor.name, tutor_path("#{tutor_subject.tutor.id}") %></td>
+          <td><%= link_to tutor_subject.subject.name, subject_path("#{tutor_subject.subject.id}") %></td>
+          <td><%= link_to tutor_subject.standard.name, standard_path("#{tutor_subject.standard.id}") %></td>
+          <td class="right aligned"><%= tutor_subject.standard.students.count %></td>
+          <td class="center aligned">
+            <%= tutor_subject.lessons.count %>
+          </td>
+          <td class="center aligned">
+            <%= tutor_subject.activities.count %>
+          </td>
+          <td class="center aligned">
+            <%= tutor_subject.exams.count %>
+          </td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+<% end %>

@@ -12,15 +12,14 @@
   </div>
 <% end %>
 
+<div class="ui center aligned raised segment">
+    <button class="ui primary basic button"><strong>Tutor's Name: </strong><%= @classroom.tutor.name %></button>
+    <button class="ui primary basic button"><strong>Class: </strong><%= @classroom.standard.name %></button>
+    <button class="ui primary basic button"><strong>Subject: </strong><%= @classroom.subject.name %></button>
+</div>
+
 <%= form_for @lesson, html: { class: "ui form", role: 'form'} do |f| %>
   <div class="ui piled segment">
-    <div class="field">
-      <%= f.label :subject, "Subject" %>
-      <div class="ui left icon input">
-        <%= f.text_field :subject, placeholder: "Subject" %>
-        <i class="book icon"></i>
-      </div>
-    </div>
     <div class="field">
       <%= f.label :topic, "Topic" %>
       <div class="ui left icon input">
@@ -28,16 +27,10 @@
         <i class="file icon"></i>
       </div>
     </div>
-    <div class="field">
-      <%= f.label :description, "Description" %>
-      <div class="ui left icon input">
-        <%= f.text_area :description, placeholder: "Write a description", rows: 2 %>
-      </div>
-    </div>
   </div>
   <div class="ui very padded segment">
-    <%= f.label :body, "Activity" %>
-    <%= f.rich_text_area :body %>
+    <%= f.label :lesson, "Lesson" %>
+    <%= f.rich_text_area :lesson %>
   </div>
   <div class="ui very relaxed segment">
     <%= f.label :video, "Activity related video" %>
@@ -46,6 +39,10 @@
   <div class="ui very relaxed segment">
     <%= f.label :audio, "Activity related audio file" %>
     <%= f.file_field :audio %>
+  </div>
+  <div class="ui very relaxed segment">
+    <%= f.label :file, "Activity related file(s)" %>
+    <%= f.file_field :file %>
   </div>
     <%= f.submit class: "ui green button" %>
 <% end %>

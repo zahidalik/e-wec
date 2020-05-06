@@ -1,0 +1,42 @@
+<% if !current_tutor.admin? %>
+  <h2 class="ui center aligned icon header">
+    <i class="orange book icon"></i>
+    <%= @subject.name %>
+  </h2>
+
+  <div class="ui raised center aligned segment">
+    <h3 class="ui center aligned teal header">Lessons</h3>
+    <% @subject_classrooms.each do |subject_classroom| %>
+      <div class="ui middle aligned large divided list">
+        <% subject_classroom.lessons.each do |lesson| %>
+          <div class="item">
+            <strong><%= link_to lesson.topic, lesson_path(lesson) %></strong>
+            <small>Created at: <%= lesson.created_at.httpdate %></small>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if current_tutor.admin? %>
+  <h2 class="ui center aligned icon header">
+    <i class="orange book icon"></i>
+    <%= @subject.name %> (in all classrooms)
+  </h2>
+
+  <div class="ui raised center aligned segment">
+    <h3 class="ui center aligned teal header">Lessons</h3>
+    <% @subject_in_all_classrooms.each do |subject_classroom| %>
+      <div class="ui middle aligned large divided list">
+        <% subject_classroom.lessons.each do |lesson| %>
+          <div class="item">
+            <strong><%= link_to lesson.topic, lesson_path(lesson) %></strong>
+            <u>Class: <%= lesson.classroom.standard.name %></u>
+            <small>Created at: <%= lesson.created_at.httpdate %></small>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

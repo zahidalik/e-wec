@@ -9,9 +9,15 @@
 </div>
 
 <% if tutor_logged_in? && current_tutor.admin? %>
-<div class="ui segment">
-  <strong><%= current_tutor.name %></strong> you are admin, please refer
-  to your dashboard to perform different actions
+<div class="ui center aligned large segment">
+  <strong><%= current_tutor.name %> (Admin)</strong> These are all the subjects taught in this class:
+  <div class="ui menu">
+    <% @standard_associations.each do |classroom| %>
+      <%= link_to subject_path("#{classroom.subject.id}"), class: "item" do %>
+       <%= classroom.subject.name %> (<%= classroom.tutor.name %>)
+      <% end %>
+    <% end %>
+  </div>
 </div>
 <% end %>
 <% if tutor_logged_in? && !current_tutor.admin? %>
@@ -20,8 +26,8 @@
     <div class="ui menu">
       <% @standard_associations.where(tutor_id: current_tutor.id).each do |classroom| %>
         <%= link_to classroom.subject.name, subject_path("#{classroom.subject.id}"), class: "item" %>
+      <% end %>
     </div>
-  <% end %>
   </div>
 <% end %>
 

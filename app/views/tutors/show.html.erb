@@ -8,91 +8,46 @@
       <div class="item">
         <h3 class="ui orange header">Status</h3>
       </div>
-      <% @tutor.standards.each do |standard| %>
-        <a class="item">
-          <%= standard.name %>
-          <div class="ui teal left pointing label"><%= standard.students.count %></div>
-        </a>
+      <% if @tutor.standards.present? %>
+        <% @tutor.standards.each do |standard| %>
+          <a class="item">
+            <%= standard.name %>
+            <div class="ui teal left pointing label"><%= standard.students.count %></div>
+          </a>
+        <% end %>
+      <% else %>
+        <a class="item">You currently don't have any classes</a>
       <% end %>
     </div>
   </div>
-  <% if !current_tutor.admin? %>
-    <div class="ui nine wide column">
-      <div class="ui top attached tabular menu">
-        <a class="active item" data-tab="first">Classes</a>
-        <a class="item" data-tab="second">Subjects</a>
-        <a class="item" data-tab="third">Classrooms</a>
-      </div>
-      <div class="ui bottom attached active tab segment" data-tab="first">
-        <% @tutor_associations.each do |classroom| %>
-          <ol class="ui large celled list">
-            <li><%= link_to classroom.standard.name, standard_path("#{classroom.standard.id}") %></li>
-          </ol>
-        <% end %>
-      </div>
-      <div class="ui bottom attached tab segment" data-tab="second">
-        <% @tutor_associations.each do |classroom| %>
-          <ol class="ui large celled list">
-            <li><%= link_to classroom.subject.name, subject_path("#{classroom.subject.id}") %> (<%= classroom.standard.name %>)</li>
-          </ol>
-        <% end %>
-      </div>
-      <div class="ui bottom attached tab segment" data-tab="third">
-        You can create new activities, lessons, exams by visiting your classroom.
-        <%= link_to "Your Classroom(s)", classrooms_path %>
-      </div>
+  <div class="ui nine wide column">
+    <div class="ui top attached tabular menu">
+      <a class="active item" data-tab="first">Classes</a>
+      <a class="item" data-tab="second">Subjects</a>
+      <a class="item" data-tab="third">Classrooms</a>
     </div>
-  <% end %>
-  <% if current_tutor.admin? %>
-    <div class="ui ten wide column">
-      <div class="ui fluid large vertical menu">
-        <a class="item">
-          <h3 class="ui center aligned teal header">
-            Actions
-          </h3>
-        </a>
-        <%= link_to tutors_path, class: "item" do %>
-          <i class="users icon"></i> All Teachers
-        <% end %>
-        <%= link_to students_path, class: "item" do %>
-          <i class="users icon"></i> All Students
-        <% end %>
-        <%= link_to '#', class: "item" do %>
-          <i class="book icon"></i> All Subjects
-        <% end %>
-        <%= link_to '#', class: "item" do %>
-          <i class="book icon"></i> All Standards
-        <% end %>
-        <%= link_to classrooms_path, class: "item" do %>
-          <i class="building icon"></i> All Classroom Relationships
-        <% end %>
-        <%= link_to '#', class: "item" do %>
-          <i class="clipboard icon"></i> All Activities (Teachers)
-        <% end %>
-        <%= link_to '#', class: "item" do %>
-          <i class="file outline icon"></i> All Exams
-        <% end %>
-        <%= link_to '#', class: "item" do %>
-          <i class="clipboard icon"></i> All Activities (Students)
-        <% end %>
-        <%= link_to new_tutor_path, class: "item" do %>
-          <i class="user plus icon"></i> Add New Teacher
-        <% end %>
-        <%= link_to new_student_path, class: "item" do %>
-          <i class="user plus icon"></i> Add New Student
-        <% end %>
-        <%= link_to new_student_path, class: "item" do %>
-          <i class="user plus icon"></i> Add New Standard
-        <% end %>
-        <%= link_to new_subject_path, class: "item" do %>
-          <i class="user plus icon"></i> Add New Subject
-        <% end %>
-        <%= link_to new_classroom_path, class: "item" do %>
-          <i class="user plus icon"></i> Add New Classroom Relationship
-        <% end %>
-      </div>
+    <div class="ui bottom attached active tab segment" data-tab="first">
+      <% @tutor_associations.each do |classroom| %>
+        <ol class="ui large celled list">
+          <li><%= link_to classroom.standard.name, standard_path("#{classroom.standard.id}") %></li>
+        </ol>
+      <% end %>
     </div>
-  <% end %>
+    <div class="ui bottom attached tab segment" data-tab="second">
+      <% @tutor_associations.each do |classroom| %>
+        <div>
+          <%= link_to "All subjects with details", subjects_path, class: "ui mini teal button" %>
+        </div>
+        <ol class="ui large celled list">
+          <li><%= link_to classroom.subject.name, subject_path("#{classroom.subject.id}") %> (<%= classroom.standard.name %>)</li>
+        </ol>
+      <% end %>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="third">
+      You can create new activities, lessons, exams by visiting your classroom.
+      <%= link_to "Your Classroom(s)", classrooms_path %>
+    </div>
+  </div>
   <div class="ui three wide column">
     <div class="ui right vertical menu">
       <div class="item">
@@ -104,3 +59,51 @@
     </div>
   </div>
 </div>
+<% if current_tutor.admin? %>
+  <div class="ui center aligned segment">
+    <h3 class="ui center aligned teal header">Actions</h3>
+    <div class="ui compact menu">
+      <%= link_to tutors_path, class: "item" do %>
+        <i class="users icon"></i> Teachers
+      <% end %>
+      <%= link_to students_path, class: "item" do %>
+        <i class="users icon"></i> Students
+      <% end %>
+      <%= link_to subjects_path, class: "item" do %>
+        <i class="book icon"></i> Subjects
+      <% end %>
+      <%= link_to standards_path, class: "item" do %>
+        <i class="book icon"></i> Standards
+      <% end %>
+      <%= link_to classrooms_path, class: "item" do %>
+        <i class="building icon"></i> Classrooms
+      <% end %>
+      <%= link_to activities_path, class: "item" do %>
+        <i class="clipboard icon"></i> Activities (Teachers)
+      <% end %>
+      <%= link_to exams_path, class: "item" do %>
+        <i class="file outline icon"></i> Exams
+      <% end %>
+      <%= link_to '#', class: "item" do %>
+        <i class="clipboard icon"></i> Activities (Students)
+      <% end %>
+    </div>
+    <div class="ui compact menu">
+      <%= link_to new_tutor_path, class: "item" do %>
+        <i class="user plus icon"></i> New Teacher
+      <% end %>
+      <%= link_to new_student_path, class: "item" do %>
+        <i class="user plus icon"></i> New Student
+      <% end %>
+      <%= link_to new_standard_path, class: "item" do %>
+        <i class="user plus icon"></i> New Standard
+      <% end %>
+      <%= link_to new_subject_path, class: "item" do %>
+        <i class="user plus icon"></i> New Subject
+      <% end %>
+      <%= link_to new_classroom_path, class: "item" do %>
+        <i class="user plus icon"></i> New Classroom
+      <% end %>
+    </div>
+  </div>
+<% end %>

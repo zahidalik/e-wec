@@ -1,9 +1,13 @@
 class ClassroomsController < ApplicationController
   before_action :require_tutor
   before_action :require_admin, only: [:new, :create]
-  
+
   def index
     @classrooms = Classroom.all
+  end
+
+  def show
+    @classroom = Classroom.find(params[:id])
   end
 
   def new

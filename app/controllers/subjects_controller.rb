@@ -1,5 +1,17 @@
 class SubjectsController < ApplicationController
-  before_action :require_admin
+  before_action :require_tutor, only: [:index]
+  before_action :require_user, only: [:show]
+  before_action :require_admin, only: [:new, :create]
+
+  def index
+    @tutor_subjects = Classroom.all
+  end
+
+  def show
+    @subject = Subject.find(params[:id])
+    @subject_classrooms = Classroom.where(subject_id: @subject.id, tutor_id: current_tutor.id)
+    @subject_in_all_classrooms = Classroom.where(subject_id: @subject.id)
+  end
 
   def new
     @subject = Subject.new

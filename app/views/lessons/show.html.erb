@@ -31,11 +31,11 @@
 
 <% if tutor_logged_in? %>
   <div class>
-    <%= link_to "Edit Activity", edit_lesson_path(@lesson), class: "fluid ui primary button" %>
+    <%= link_to "Edit Lesson", edit_lesson_path(@lesson), class: "fluid ui primary button" %>
   </div>
   <% if current_tutor.admin? %>
     <div>
-      <%= link_to "Delete Activity", lesson_path(@lesson), method: :delete,
+      <%= link_to "Delete Lesson", lesson_path(@lesson), method: :delete,
                   data: { confirm: "Are you sure"}, class: "fluid ui negative button" %>
     </div>
   <% end %>

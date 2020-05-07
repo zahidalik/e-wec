@@ -17,7 +17,9 @@
         <td data-label="Standard"><%= link_to classroom.standard.name, standard_path("#{classroom.standard.id}") %></td>
         <td data-label="Subject"><%= classroom.subject.name %></td>
         <td data-label="Teacher"><%= classroom.tutor.name %></td>
-        <td data-label="Actions"><%= link_to "Show", classroom_path(classroom), class: "ui mini primary button" %></td>
+        <td data-label="Actions"><%= link_to classroom_path(classroom) do %>
+                                    <i class="ui pencil icon"></i> Lesson/Activity/Exam
+                                  <% end %></td>
       </tr>
     </tbody>
       <% end %>

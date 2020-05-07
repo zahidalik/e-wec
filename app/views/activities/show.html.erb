@@ -1,0 +1,42 @@
+<div class="ui center aligned raised segment">
+  <button class="ui primary basic button">Tutor: <%= @activity.classroom.tutor.name %></button>
+  <button class="ui primary basic button">Class: <%= @activity.classroom.standard.name %></button>
+  <button class="ui teal basic button">Subject: <%= @activity.classroom.subject.name %></button>
+  <button class="ui brown basic button">Topic: <%= @activity.topic %></button>
+  <button class="ui primary basic button">Created: <%= @activity.created_at.httpdate %></button>
+  <button class="ui primary basic button">Updated: <%= @activity.updated_at.httpdate %></button>
+</div>
+
+<div class="ui segment">
+  <%= @activity.activity %>
+</div>
+
+<% if @activity.activity_video.present? %>
+  <div class="ui center aligned inverted segment">
+    <%= video_tag(url_for(@activity.activity_video), style: 'width:600px; height:400px', controls: '') %>
+  </div>
+<% end %>
+
+<% if @activity.activity_audio.present? %>
+  <div class="ui center aligned inverted segment">
+    <%= audio_tag(url_for(@activity.activity_audio), controls: '') %>
+  </div>
+<% end %>
+
+<% if @activity.activity_file.present? %>
+  <div class="ui center aligned inverted segment">
+    <%= file_tag(url_for(@activity.activity_file), controls: '') %>
+  </div>
+<% end %>
+
+<% if tutor_logged_in? %>
+  <div class>
+    <%= link_to "Edit Activity", edit_activity_path(@activity), class: "fluid ui primary button" %>
+  </div>
+  <% if current_tutor.admin? %>
+    <div>
+      <%= link_to "Delete Activity", activity_path(@activity), method: :delete,
+                  data: { confirm: "Are you sure"}, class: "fluid ui negative button" %>
+    </div>
+  <% end %>
+<% end %>

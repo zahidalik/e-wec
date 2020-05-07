@@ -1,0 +1,24 @@
+<h2 class="ui center aligned icon header">
+  <i class="orange globe icon"></i>
+   All Activities (in all classrooms and all subjects)
+</h2>
+
+<table class="ui teal table">
+  <thead>
+    <tr><th>Topic</th>
+    <th>Tutor</th>
+    <th>Class</th>
+    <th>Subject</th>
+    <th>Date and Time</th>
+  </tr></thead><tbody>
+    <% @activities.each do |activity| %>
+    <tr>
+      <td><%= link_to activity.topic, activity_path(activity) %></td>
+      <td><%= activity.classroom.tutor.name %></td>
+      <td><%= activity.classroom.standard.name %></td>
+      <td><%= activity.classroom.subject.name %></td>
+      <td><%= activity.created_at.httpdate %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

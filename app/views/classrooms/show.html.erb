@@ -4,9 +4,28 @@
   class with <u><%= @classroom.subject.name %></u> subject
 </h2>
 
-<%= @classroom.standard.name %>
-<%= @classroom.standard.students.count %>
-<%= link_to "New Lesson for this classroom", new_lesson_path %>
-<%= link_to "New Activity for this classroom", new_activity_path %>
-<%= link_to "New Exam for this classroom", new_exam_path %>
+<table class="ui celled table">
+  <thead>
+    <tr>
+      <th>Class</th>
+      <th>No. of Students</th>
+      <th>Lesson</th>
+      <th>Activity</th>
+      <th>Exam</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @classroom.standard.name %></td>
+      <td class="warning"><%= @classroom.standard.students.count %></td>
+      <td class="positive"><i class="icon checkmark"></i>
+        <%= link_to "New Lesson", new_lesson_path %></td>
+      <td class="positive"><i class="icon checkmark"></i>
+        <%= link_to "New Activity", new_activity_path %></td>
+      <td class="positive"><i class="icon checkmark"></i>
+        <%= link_to "New Exam", new_exam_path %></td>
+    </tr>
+  </tbody>
+</table>
+
 <% session[:classroom_id] = @classroom.id %>

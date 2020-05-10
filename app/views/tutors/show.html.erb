@@ -2,6 +2,8 @@
   <i class="circular orange desktop icon"></i>
   <%= @tutor.name %>&apos;s Dashboard
 </h2>
+
+
 <div class="ui grid">
   <div class="ui three wide column">
     <div class="ui left vertical menu">
@@ -20,11 +22,12 @@
       <% end %>
     </div>
   </div>
-  <div class="ui nine wide column">
+  <div class="ui thirteen wide column">
     <div class="ui top attached tabular menu">
       <a class="active item" data-tab="first">Classes</a>
       <a class="item" data-tab="second">Subjects</a>
-      <a class="item" data-tab="third">Classrooms</a>
+      <a class="item" data-tab="third">Lessons/Activities/Exams</a>
+      <a class="item" data-tab="fourth">Your Profile</a>
     </div>
     <div class="ui bottom attached active tab segment" data-tab="first">
       <% @tutor_associations.each do |classroom| %>
@@ -44,18 +47,27 @@
       <% end %>
     </div>
     <div class="ui bottom attached tab segment" data-tab="third">
-      You can create new activities, lessons, exams by visiting your classroom.
-      <%= link_to "Your Classroom(s)", classrooms_path %>
+      <%= link_to classrooms_path do %>
+        <i class="ui edit icon"></i> Lessons/Activities/Exams
+      <% end %>
     </div>
-  </div>
-  <div class="ui three wide column">
-    <div class="ui right vertical menu">
-      <div class="item">
-        <h3 class="ui orange header">Profile</h3>
+    <div class="ui bottom attached tab segment" data-tab="fourth">
+      <div class="ui list">
+        <div class="item">
+          <strong>Name: </strong><%= @tutor.name %>
+        </div>
+        <div class="item">
+          <strong>Contact: </strong><%= @tutor.contact %>
+        </div>
+        <div class="item">
+          <strong>Address: </strong><%= @tutor.address %>
+        </div>
+        <div class="item">
+          <%= link_to edit_tutor_path(@tutor) do %>
+            <i class="ui edit icon"></i> Edit your profile
+          <% end %>
+        </div>
       </div>
-      <a class="active brown item"><strong>Name: </strong><%= @tutor.name %></a>
-      <a class="item"><strong>Contact: </strong><%= @tutor.contact %></a>
-      <a class="item"><strong>Address: </strong><%= @tutor.address %></a>
     </div>
   </div>
 </div>

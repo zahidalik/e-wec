@@ -12,4 +12,5 @@ $(document).on('turbolinks:load', function() {
   $('.ui.checkbox').checkbox();
 
   $('.menu .item').tab();
+  
 })

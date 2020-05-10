@@ -9,7 +9,9 @@ class StudentsController < ApplicationController
   end
 
   def show
-    @student_standard = @student.standards.last
+    @student_standards = @student.standards.select { |standard|
+                                standard.created_at.year == Date.current.year }
+    @student_standard = @student_standards.last
   end
 
   def new

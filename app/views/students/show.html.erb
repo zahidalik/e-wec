@@ -2,52 +2,68 @@
   <h2 class="ui center aligned teal icon header">
     <i class="orange desktop icon"></i>
     <%= @student.name %>&apos;s Dashboard
-    <div>
-      Class: <%= @student_standard.name %>
-    </div>
-    <div>
-      Your subjects in this class:
-    </div>
-    <div class="ui menu">
-      <% @student_standard.subjects.each do |subject| %>
-       <div class="item">
-         <%= subject.name %>
-       </div>
-      <% end %>
-    </div>
-  </h2>
+    <% if @student_standards.any? %>
+      <div>
+        Class: <%= @student_standard.name %>
+      </div>
+      <div>
+        Your subjects in this class:
+      </div>
+      <div class="ui menu">
+        <% @student_standard.subjects.each do |subject| %>
+         <div class="item">
+           <%= subject.name %>
+         </div>
+        <% end %>
+      </div>
+    </h2>
 
-  <div class="ui top attached tabular menu">
-    <a class="active item" data-tab="first">Lessons</a>
-    <a class="item" data-tab="second">Activities</a>
-    <a class="item" data-tab="third">Exams</a>
-    <a class="item" data-tab="fourth">Profile</a>
-  </div>
-  <div class="ui bottom attached active tab segment" data-tab="first">
-    <% @student_standard.classrooms.each do |student_classroom| %>
-      <% student_classroom.lessons.each do |lesson| %>
-        <ul class="ui large celled list">
-          <li><%= link_to lesson.topic, lesson_path(lesson) %>
-              (<%= lesson.classroom.subject.name %>) <small><%= lesson.created_at.httpdate %></small></li>
-        </ul>
+    <div class="ui top attached tabular menu">
+      <a class="active item" data-tab="first">Lessons</a>
+      <a class="item" data-tab="second">Activities</a>
+      <a class="item" data-tab="third">Exams</a>
+      <a class="item" data-tab="fourth">Interactions</a>
+      <a class="item" data-tab="fifth">Profile</a>
+    </div>
+    <div class="ui bottom attached active tab segment" data-tab="first">
+      <% @student_standard.classrooms.each do |student_classroom| %>
+        <% student_classroom.lessons.each do |lesson| %>
+          <ul class="ui large celled list">
+            <li><%= link_to lesson.topic, lesson_path(lesson) %>
+                (<%= lesson.classroom.subject.name %>) <small><%= lesson.created_at.httpdate %></small></li>
+          </ul>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
-  <div class="ui bottom attached tab segment" data-tab="second">
-    <% @student_standard.classrooms.each do |student_classroom| %>
-      <% student_classroom.activities.each do |activity| %>
-        <ul class="ui large celled list">
-          <li><%= link_to activity.topic, activity_path(activity) %>
-              (<%= activity.classroom.subject.name %>) <small><%= activity.created_at.httpdate %></small></li>
-        </ul>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="second">
+      <% @student_standard.classrooms.each do |student_classroom| %>
+        <% student_classroom.activities.each do |activity| %>
+          <ul class="ui large celled list">
+            <li><%= link_to activity.topic, activity_path(activity) %>
+                (<%= activity.classroom.subject.name %>) <small><%= activity.created_at.httpdate %></small></li>
+          </ul>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
-  <div class="ui bottom attached tab segment" data-tab="third">
-    <%= link_to "Exams", '#' %>
-  </div>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="third">
+      <%= link_to "Exams", '#' %>
+    </div>
 
-  <div class="ui bottom attached tab segment" data-tab="fourth">
+    <div class="ui bottom attached tab segment" data-tab="fourth">
+      <% @student_standard.classrooms.each do |student_classroom| %>
+        <% student_classroom.lessons.each do |lesson| %>
+          <% lesson.interactions.each do |interaction| %>
+            <ul class="ui large celled list">
+              <li><%= link_to interaction.topic, interaction_path(interaction) %>
+              <small>Lesson Topic: <%= interaction.lesson.topic %>
+              <%= interaction.created_at.to_date %></small></li>
+            </ul>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="ui bottom attached tab segment" data-tab="fifth">
     <div class="ui large bulleted list">
       <div class="item">
         Name: <strong><%= @student.name %></strong>
@@ -80,21 +96,75 @@
 <% end %>
 
 <% if tutor_logged_in? %>
-<h2 class="ui center aligned teal icon header">
-  <i class="orange circle user icon"></i>
-  <%= @student.name %>
-  <div>
-    Class: <%= @student_standard.name %>
+  <h2 class="ui center aligned teal icon header">
+    <i class="orange circle user icon"></i>
+    <%= @student.name %>
+    <% if @student_standards.any? %>
+    <div>
+      Class: <%= @student_standard.name %>
+    </div>
+    <div>
+      Subjects taught in this class:
+    </div>
+    <div class="ui menu">
+      <% @student_standard.subjects.each do |subject| %>
+        <div class="item">
+          <%= subject.name %>
+        </div>
+      <% end %>
+    </div>
+  </h2>
+  <div class="ui top attached tabular menu">
+    <a class="active item" data-tab="first">Interactions for Lessons</a>
+    <a class="item" data-tab="second">Replies for Activities</a>
+    <a class="item" data-tab="third">Answers for Exams</a>
   </div>
-  <div>
-    Subjects in this class:
-  </div>
-  <div class="ui menu">
-    <% @student_standard.subjects.each do |subject| %>
-     <div class="item">
-       <%= link_to subject.name, subject_path(subject) %>
-     </div>
+  <% if current_tutor.admin? %>
+  <div class="ui bottom attached active tab segment" data-tab="first">
+    <% @student_interactions.each do |interaction| %>
+      <ul class="ui large celled list">
+        <li><%= link_to interaction.topic, interaction_path(interaction) %>
+            (<%= interaction.lesson.topic %> <%= interaction.lesson.classroom.subject.name %>)
+            <small><%= interaction.created_at.httpdate %></small></li>
+      </ul>
+      <% end %>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="second">
+      <% @student_standard.classrooms.each do |student_classroom| %>
+        <% student_classroom.activities.each do |activity| %>
+          <ul class="ui large celled list">
+            <li><%= link_to activity.topic, activity_path(activity) %>
+                (<%= activity.classroom.subject.name %>) <small><%= activity.created_at.httpdate %></small></li>
+          </ul>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="third">
+      <%= link_to "Exams", '#' %>
+    </div>
+    <% else %>
+    <div class="ui bottom attached active tab segment" data-tab="first">
+      <ul class="ui large celled list">
+        <% @tutor_student_interactions.each do |interaction| %>
+        <li><%= link_to interaction.topic, interaction_path(interaction) %>
+            (<%= interaction.lesson.topic %> <%= interaction.lesson.classroom.subject.name %>)
+            <small><%= interaction.created_at.httpdate %></small></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="second">
+      <% @student_standard.classrooms.each do |student_classroom| %>
+        <% student_classroom.activities.each do |activity| %>
+          <ul class="ui large celled list">
+            <li><%= link_to activity.topic, activity_path(activity) %>
+                (<%= activity.classroom.subject.name %>) <small><%= activity.created_at.httpdate %></small></li>
+          </ul>
+        <% end %>
+      <% end %>
+      </div>
+      <div class="ui bottom attached tab segment" data-tab="third">
+        <%= link_to "Exams", '#' %>
+      </div>
     <% end %>
-  </div>
-</h2>
+  <% end %>
 <% end %>

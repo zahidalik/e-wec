@@ -12,6 +12,9 @@ class StudentsController < ApplicationController
     @student_standards = @student.standards.select { |standard|
                                 standard.created_at.year == Date.current.year }
     @student_standard = @student_standards.last
+    @student_interactions = @student.interactions
+    @tutor_student_interactions = Interaction.select { |interaction|
+          interaction.lesson.classroom.tutor.id == current_tutor.id }
   end
 
   def new

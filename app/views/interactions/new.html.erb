@@ -1,0 +1,34 @@
+<div class="ui center aligned raised segment">
+    <button class="ui primary basic button"><strong>Tutor's Name: </strong><%= @interaction.lesson.classroom.tutor.name %></button>
+    <button class="ui primary basic button"><strong>Class: </strong><%= @interaction.lesson.classroom.standard.name %></button>
+    <button class="ui primary basic button"><strong>Subject: </strong><%= @interaction.lesson.classroom.subject.name %></button>
+    <button class="ui primary basic button"><strong>Created at: </strong><%= @interaction.lesson.classroom.created_at.httpdate %></button>
+</div>
+
+<div class="ui center aligned piled segment">
+  <button class="ui primary basic button"><strong>Topic: </strong><%= @lesson.topic %></button>
+</div>
+<div class="ui segment">
+  <%= @lesson.lesson %>
+</div>
+
+<% if @lesson.video.present? %>
+  <div class="ui center aligned inverted segment">
+    <%= video_tag(url_for(@lesson.video), style: 'width:600px; height:400px', controls: '') %>
+  </div>
+<% end %>
+
+<% if @lesson.audio.present? %>
+  <div class="ui center aligned inverted segment">
+    <%= audio_tag(url_for(@lesson.audio), controls: '') %>
+  </div>
+<% end %>
+
+<div>
+  <div class="ui inverted segment">
+    <h3 class="ui center aligned header">
+      <%= current_student.name %> your interaction:
+    </h3>
+  </div>
+  <%= render 'form' %>
+</div>

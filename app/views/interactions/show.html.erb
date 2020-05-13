@@ -1,0 +1,34 @@
+<div class="ui center aligned raised segment">
+  <button class="ui primary basic button">Student: <%= @interaction.student.name %></button>
+  <button class="ui primary basic button">Class: <%= @interaction.student.standards.last.name %></button>
+  <button class="ui teal basic button">Subject: <%= @interaction.lesson.classroom.subject.name %></button>
+  <button class="ui brown basic button">Topic: <%= @interaction.topic %></button>
+  <button class="ui primary basic button">Created: <%= @interaction.created_at.httpdate %></button>
+  <button class="ui primary basic button">Updated: <%= @interaction.updated_at.httpdate %></button>
+</div>
+
+<div class="ui segment">
+  <%= @interaction.interaction %>
+</div>
+
+<% if @interaction.interaction_audio.present? %>
+  <div class="ui center aligned inverted segment">
+    <%= audio_tag(url_for(@interaction.interaction_audio), controls: '') %>
+  </div>
+<% end %>
+
+<% if @interaction.interaction_file.present? %>
+  <div class="ui center aligned inverted segment">
+    <%= file_tag(url_for(@interaction.interaction_file), controls: '') %>
+  </div>
+<% end %>
+
+<% if student_logged_in? %>
+  <%= link_to "Back to your Dashboard", student_path(current_student), class: "ui primary button" %>
+<% end %>
+
+<% if tutor_logged_in? %>
+  <div class>
+    <%= link_to "Back to the students page", student_path("#{@interaction.student.id}"), class: "ui primary button" %>
+  </div>
+<% end %>

@@ -27,9 +27,4 @@ class ClassroomsController < ApplicationController
     end
   end
 
-  private
-
-  def classroom_params
-    params.require(:classroom).permit(:tutor_id, :standard_id, :subject_id)
-  end
 end

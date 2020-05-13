@@ -29,6 +29,11 @@
   </div>
 <% end %>
 
+<% if student_logged_in? %>
+  <% session[:lesson_id] = @lesson.id %>
+  <%= link_to "New interaction with this lesson", new_interaction_path, class: "ui primay green button" %>
+<% end %>
+
 <% if tutor_logged_in? %>
   <div class>
     <%= link_to "Edit Lesson", edit_lesson_path(@lesson), class: "fluid ui primary button" %>

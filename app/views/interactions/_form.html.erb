@@ -1,0 +1,38 @@
+<% if @interaction.errors.any? %>
+  <div class="ui error message">
+    <i class="close icon"></i>
+    <div class="header">
+      <%= pluralize(@interaction.errors.count, "error") %> prohibited your interaction with the lesson from being added:
+    </div>
+    <ul class="list">
+      <% @interaction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for @interaction, html: { class: "ui form", role: 'form'} do |f| %>
+  <div class="ui piled segment">
+    <div class="field">
+      <%= f.label :topic, "Topic" %>
+      <div class="ui left icon input">
+        <%= f.text_field :topic, placeholder: "Topic" %>
+        <i class="file icon"></i>
+      </div>
+    </div>
+  </div>
+  <div class="ui very relaxed segment">
+    <%= f.label :interaction %>
+    <%= f.rich_text_area :interaction %>
+  </div>
+  <div class="ui very relaxed segment">
+    <%= f.label :interaction_audio, "If you want to upload any audio file" %>
+    <%= f.file_field :interaction_audio %>
+  </div>
+  <div class="ui very relaxed segment">
+    <%= f.label :interaction_file, "If you want to uplaoad any other file" %>
+    <%= f.file_field :interaction_file %>
+  </div>
+    <%= f.submit class: "ui green button" %>
+<% end %>

@@ -90,14 +90,25 @@
       <%= link_to classrooms_path, class: "item" do %>
         <i class="building icon"></i> Classrooms
       <% end %>
+      <%= link_to lessons_path, class: "item" do %>
+        <i class="clipboard icon"></i> Lessons
+      <% end %>
+    </div>
+    <div class="ui compact menu">
       <%= link_to activities_path, class: "item" do %>
-        <i class="clipboard icon"></i> Activities (Teachers)
+        <i class="clipboard icon"></i> Activities
       <% end %>
       <%= link_to exams_path, class: "item" do %>
         <i class="file outline icon"></i> Exams
       <% end %>
-      <%= link_to '#', class: "item" do %>
-        <i class="clipboard icon"></i> Activities (Students)
+      <%= link_to interactions_path, class: "item" do %>
+        <i class="clipboard icon"></i> Interactions
+      <% end %>
+      <%= link_to replies_path, class: "item" do %>
+        <i class="clipboard icon"></i> Replies
+      <% end %>
+      <%= link_to answers_path, class: "item" do %>
+        <i class="clipboard icon"></i> Answers
       <% end %>
     </div>
     <div class="ui compact menu">

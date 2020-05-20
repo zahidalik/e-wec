@@ -2,7 +2,7 @@
   <div class="ui error message">
     <i class="close icon"></i>
     <div class="header">
-      <%= pluralize(@answer.errors.count, "error") %> prohibited Activity from being added:
+      <%= pluralize(@answer.errors.count, "error") %> prohibited your answer from being created:
     </div>
     <ul class="list">
       <% @answer.errors.full_messages.each do |message| %>
@@ -13,23 +13,7 @@
 <% end %>
 
 <%= form_for @answer, html: { class: "ui form", role: 'form'} do |f| %>
-  <div class="ui piled segment">
-    <div class="field">
-      <%= f.label :subject, "Subject" %>
-      <div class="ui left icon input">
-        <%= f.text_field :subject, placeholder: "Subject" %>
-        <i class="book icon"></i>
-      </div>
-    </div>
-    <div class="field">
-      <%= f.label :topic, "Topic" %>
-      <div class="ui left icon input">
-        <%= f.text_field :topic, placeholder: "Topic" %>
-        <i class="file icon"></i>
-      </div>
-    </div>
-  </div>
-  <div class="ui very padded segment">
+  <div class="field">
     <%= f.label :answer, "Answer" %>
     <%= f.rich_text_area :answer %>
   </div>

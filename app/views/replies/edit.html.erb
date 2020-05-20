@@ -1,0 +1,39 @@
+<div class="ui two column stackable grid">
+  <div class="column">
+    <div class="ui center aligned raised brown segment">
+        <button class="ui primary basic button"><strong>Tutor's Name: </strong><%= @reply.activity.classroom.tutor.name %></button>
+        <button class="ui primary basic button"><strong>Class: </strong><%= @reply.activity.classroom.standard.name %></button>
+        <button class="ui primary basic button"><strong>Subject: </strong><%= @reply.activity.classroom.subject.name %></button>
+        <button class="ui primary basic button"><strong>Created at: </strong><%= @reply.activity.classroom.created_at.httpdate %></button>
+    </div>
+
+    <div class="ui center aligned teal segment">
+      <button class="ui primary basic button"><strong>Topic: </strong><%= @reply.activity.topic %></button>
+    </div>
+    <div class="ui blue segment">
+      <%= @reply.activity.activity %>
+    </div>
+
+    <% if @reply.activity.activity_video.present? %>
+      <div class="ui center aligned inverted segment">
+        <%= video_tag(url_for(@reply.activity.activity_video), style: 'width:600px; height:400px', controls: '') %>
+      </div>
+    <% end %>
+
+    <% if @reply.activity.activity_audio.present? %>
+      <div class="ui center aligned inverted segment">
+        <%= audio_tag(url_for(@reply.activity.activity_audio), controls: '') %>
+      </div>
+    <% end %>
+  </div>
+  <div class="column">
+    <div>
+      <div class="ui green segment">
+        <h3 class="ui center aligned header">
+          <%= current_student.name %> your reply:
+        </h3>
+      </div>
+      <%= render 'form' %>
+    </div>
+  </div>
+</div>

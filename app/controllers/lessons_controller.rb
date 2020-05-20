@@ -2,7 +2,11 @@ class LessonsController < ApplicationController
   before_action :set_lesson, only: [:show, :edit, :update, :destroy]
   before_action :set_classroom, only: [:new, :create]
   before_action :require_tutor, except: [:show]
-  before_action :require_admin, only: [:destroy]
+  before_action :require_admin, only: [:index, :destroy]
+
+  def index
+    @lessons = Lesson.all
+  end
 
   def show
   end

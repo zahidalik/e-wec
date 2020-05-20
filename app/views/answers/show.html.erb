@@ -1,19 +1,41 @@
-<div>
-  <button class="fluid ui teal button">Topic: <%= @answer.topic %></button>
-</div>
-<div>
-  <button class="fluid ui green button">Subject: <%= @answer.subject %></button>
-</div>
-<div>
-  <button class="fluid ui orange button">Date: <%= @answer.created_at %></button>
-</div>
+<div class="ui two column stackable grid">
+  <div class="column">
+    <div class="ui center aligned raised brown segment">
+      <button class="ui primary basic button">Tutor: <%= @answer.exam.classroom.tutor.name %></button>
+      <button class="ui primary basic button">Class: <%= @answer.exam.classroom.standard.name %></button>
+      <button class="ui teal basic button">Subject: <%= @answer.exam.classroom.subject.name %></button>
+      <button class="ui brown basic button">Topic: <%= @answer.exam.topic %></button>
+      <button class="ui primary basic button">Start: <%= @answer.exam.date.strftime('%a, %d %b %Y') %>, <%= @answer.exam.date.localtime.strftime("%I:%M %p") %></button>
+      <button class="ui primary basic button">End: <%= @answer.exam.end_date.strftime('%a, %d %b %Y') %>, <%= @answer.exam.end_date.localtime.strftime("%I:%M %p") %></button>
+    </div>
 
-<div class="ui segment">
-  <%= @answer.answer %>
-</div>
-
-<% if student_logged_in? %>
-  <div class>
-    <%= link_to "Edit Answer", edit_answer_path(@answer), class: "fluid ui primary button" %>
+    <div class="ui blue segment">
+      <%= @answer.exam.exam %>
+    </div>
   </div>
-<% end %>
+
+  <div class="column">
+    <div class="ui center aligned raised green segment">
+      <button class="ui primary basic button">Student: <%= @answer.student.name %></button>
+      <button class="ui green basic button">Answer sent at: <%= @answer.created_at.strftime('%a, %d %b %Y') %>, <%= @answer.created_at.localtime.strftime("%I:%M %p") %></button>
+    </div>
+
+    <div class="ui teal segment">
+      <%= @answer.answer %>
+    </div>
+
+    <% if student_logged_in? %>
+      <%= link_to "Back to your Dashboard", student_path(current_student), class: "ui primary button" %>
+    <% end %>
+
+    <% if tutor_logged_in? %>
+      <div class>
+        <%= link_to "To the student's page", student_path("#{@answer.student.id}"), class: "ui primary button" %>
+      </div>
+      <% if current_tutor.admin? %>
+        <%= link_to "Delete the answer", answer_path(@answer), method: :delete,
+            class: "ui negative button", data: { confirm: "Are you sure?" } %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

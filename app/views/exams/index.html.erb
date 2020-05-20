@@ -1,0 +1,67 @@
+<% if tutor_logged_in? %>
+  <% if current_tutor.admin? %>
+    <h2 class="ui center aligned icon header">
+      <i class="orange globe icon"></i>
+       All Exams posted till date (in all classrooms and all subjects)
+    </h2>
+
+    <table class="ui teal table">
+      <thead>
+        <tr><th>Topic</th>
+        <th>Subject</th>
+        <th>Class</th>
+        <th>Tutor</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Created At</th>
+      </tr></thead><tbody>
+        <% @exams.each do |exam| %>
+        <tr>
+          <td><%= link_to exam.topic, exam_path(exam) %></td>
+          <td><%= exam.classroom.subject.name %></td>
+          <td><%= exam.classroom.standard.name %></td>
+          <td><%= exam.classroom.tutor.name%></td>
+          <td><%= exam.date.strftime('%a, %d %b %Y') %>, <%= exam.date.localtime.strftime("%I:%M %p") %></td>
+          <td><%= exam.end_date.strftime('%a, %d %b %Y') %>, <%= exam.end_date.localtime.strftime("%I:%M %p") %></td>
+          <td><%= exam.created_at.strftime('%a, %d %b %Y') %>, <%= exam.created_at.localtime.strftime("%I:%M %p") %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+<% end %>
+
+<% if student_logged_in? %>
+  <h2 class="ui center aligned icon header">
+    <i class="orange globe icon"></i>
+     <%= current_student.name %> all your due exams:
+  </h2>
+
+  <table class="ui teal table">
+    <thead>
+      <tr><th>Topic</th>
+      <th>Subject</th>
+      <th>Class</th>
+      <th>Tutor</th>
+      <th>Start</th>
+      <th>End</th>
+    </tr></thead><tbody>
+      <% current_student.standards.each do |standard| %>
+        <% standard.classrooms.each do |classroom| %>
+          <% classroom.exams.each do |exam| %>
+            <% if exam.date <= DateTime.current && exam.end_date >= DateTime.current %>
+              <tr>
+                <td><%= link_to exam.topic, exam_path(exam) %></td>
+                <td><%= exam.classroom.subject.name %></td>
+                <td><%= exam.classroom.standard.name %></td>
+                <td><%= exam.classroom.tutor.name%></td>
+                <td><%= exam.date.strftime('%a, %d %b %Y') %>, <%= exam.date.localtime.strftime("%I:%M %p") %></td>
+                <td><%= exam.end_date.strftime('%a, %d %b %Y') %>, <%= exam.end_date.localtime.strftime("%I:%M %p") %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

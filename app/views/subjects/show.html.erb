@@ -11,7 +11,7 @@
         <% subject_classroom.lessons.each do |lesson| %>
           <div class="item">
             <strong><%= link_to lesson.topic, lesson_path(lesson) %></strong>
-            <small>Created at: <%= lesson.created_at.httpdate %></small>
+            <small>Created: <%= lesson.created_at.strftime('%a, %d %b %Y') %></small>
           </div>
         <% end %>
       </div>
@@ -24,7 +24,20 @@
         <% subject_classroom.activities.each do |activity| %>
           <div class="item">
             <strong><%= link_to activity.topic, activity_path(activity) %></strong>
-            <small>Created at: <%= activity.created_at.httpdate %></small>
+            <small>Created: <%= activity.created_at.strftime('%a, %d %b %Y') %></small>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="ui raised center aligned segment">
+    <h3 class="ui center aligned teal header">Exams</h3>
+    <% @subject_classrooms.each do |subject_classroom| %>
+      <div class="ui middle aligned large divided list">
+        <% subject_classroom.exams.each do |exam| %>
+          <div class="item">
+            <strong><%= link_to exam.topic, exam_path(exam) %></strong>
+            <small>Created: <%= exam.created_at.strftime('%a, %d %b %Y') %></small>
           </div>
         <% end %>
       </div>
@@ -46,7 +59,7 @@
           <div class="item">
             <strong><%= link_to lesson.topic, lesson_path(lesson) %></strong>
             <u>Class: <%= lesson.classroom.standard.name %></u>
-            <small>Created at: <%= lesson.created_at.httpdate %></small>
+            <small>Created: <%= lesson.created_at.strftime('%a, %d %b %Y') %></small>
             <strong>[<%= lesson.classroom.tutor.name %>]</strong>
           </div>
         <% end %>
@@ -61,8 +74,23 @@
           <div class="item">
             <strong><%= link_to activity.topic, activity_path(activity) %></strong>
             <u>Class: <%= activity.classroom.standard.name %></u>
-            <small>Created at: <%= activity.created_at.httpdate %></small>
+            <small>Created: <%= activity.created_at.strftime('%a, %d %b %Y') %></small>
             <strong>[<%= activity.classroom.tutor.name %>]</strong>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="ui raised center aligned segment">
+    <h3 class="ui center aligned teal header">Exams</h3>
+    <% @subject_in_all_classrooms.each do |subject_classroom| %>
+      <div class="ui middle aligned large divided list">
+        <% subject_classroom.exams.each do |exam| %>
+          <div class="item">
+            <strong><%= link_to exam.topic, exam_path(exam) %></strong>
+            <u>Class: <%= exam.classroom.standard.name %></u>
+            <small>Created: <%= exam.created_at.strftime('%a, %d %b %Y') %></small>
+            <strong>[<%= exam.classroom.tutor.name %>]</strong>
           </div>
         <% end %>
       </div>

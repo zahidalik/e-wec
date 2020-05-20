@@ -1,0 +1,24 @@
+<h2 class="ui center aligned icon header">
+  <i class="orange globe icon"></i>
+   All Lessons (in all classrooms and all subjects)
+</h2>
+
+<table class="ui teal table">
+  <thead>
+    <tr><th>Topic</th>
+    <th>Tutor</th>
+    <th>Class</th>
+    <th>Subject</th>
+    <th>Date and Time</th>
+  </tr></thead><tbody>
+    <% @lessons.each do |lesson| %>
+    <tr>
+      <td><%= link_to lesson.topic, lesson_path(lesson) %></td>
+      <td><%= lesson.classroom.tutor.name %></td>
+      <td><%= lesson.classroom.standard.name %></td>
+      <td><%= lesson.classroom.subject.name %></td>
+      <td><%= lesson.created_at.strftime('%a, %d %b %Y') %>, <%= lesson.created_at.localtime.strftime("%I:%M %p") %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

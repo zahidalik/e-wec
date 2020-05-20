@@ -17,21 +17,26 @@
   </div>
 <% end %>
 
-<% if @lesson.audio.present? %>
-  <div class="ui center aligned inverted segment">
-    <%= audio_tag(url_for(@lesson.audio), controls: '') %>
+<div class="ui two column grid">
+  <div class="ui column">
+    <% if @lesson.audio.present? %>
+      <div class="ui center aligned inverted segment">
+        <%= audio_tag(url_for(@lesson.audio), controls: '') %>
+      </div>
+    <% end %>
   </div>
-<% end %>
-
-<% if @lesson.file.present? %>
-  <div class="ui center aligned inverted segment">
-    <%= file_tag(url_for(@lesson.file), controls: '') %>
+  <div class="column">
+    <% if @lesson.file.present? %>
+      <div class="ui center aligned inverted segment">
+        <%= file_tag(url_for(@lesson.file), controls: '') %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
 
 <% if student_logged_in? %>
   <% session[:lesson_id] = @lesson.id %>
-  <%= link_to "New interaction with this lesson", new_interaction_path, class: "ui primay green button" %>
+  <%= link_to "New interaction with this lesson", new_interaction_path, class: "ui primay green fluid button" %>
 <% end %>
 
 <% if tutor_logged_in? %>

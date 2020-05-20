@@ -1,0 +1,70 @@
+<div class="ui two column stackable grid">
+  <div class="column">
+    <div class="ui center aligned raised brown segment">
+      <button class="ui primary basic button">Tutor: <%= @reply.activity.classroom.tutor.name %></button>
+      <button class="ui primary basic button">Class: <%= @reply.activity.classroom.standard.name %></button>
+      <button class="ui teal basic button">Subject: <%= @reply.activity.classroom.subject.name %></button>
+      <button class="ui brown basic button">Topic: <%= @reply.activity.topic %></button>
+      <button class="ui primary basic button">Created: <%= @reply.activity.created_at.strftime('%a, %d %b %Y') %></button>
+    </div>
+
+    <div class="ui blue segment">
+      <%= @reply.activity.activity %>
+    </div>
+
+    <% if @reply.activity.activity_video.present? %>
+      <div class="ui center aligned inverted segment">
+        <%= video_tag(url_for(@reply.activity.activity_video), style: 'width:600px; height:400px', controls: '') %>
+      </div>
+    <% end %>
+
+    <% if @reply.activity.activity_audio.present? %>
+      <div class="ui center aligned inverted segment">
+        <%= audio_tag(url_for(@reply.activity.activity_audio), controls: '') %>
+      </div>
+    <% end %>
+
+    <% if @reply.activity.activity_file.present? %>
+      <div class="ui center aligned inverted segment">
+        <%= file_tag(url_for(@reply.activity.activity_file), controls: '') %>
+      </div>
+    <% end %>
+  </div>
+  <div class="column">
+    <div class="ui center aligned raised green segment">
+      <button class="ui primary basic button">Student: <%= @reply.student.name %></button>
+      <button class="ui primary basic button">Class: <%= @reply.student.standards.last.name %></button>
+      <button class="ui teal basic button">Subject: <%= @reply.activity.classroom.subject.name %></button>
+      <button class="ui brown basic button">Topic: <%= @reply.topic %></button>
+      <button class="ui primary basic button">Created: <%= @reply.created_at.strftime('%a, %d %b %Y') %></button>
+      <button class="ui primary basic button">Updated: <%= @reply.updated_at.strftime('%a, %d %b %Y') %></button>
+    </div>
+
+    <div class="ui teal segment">
+      <%= @reply.reply %>
+    </div>
+
+    <% if @reply.reply_audio.present? %>
+      <div class="ui center aligned inverted segment">
+        <%= audio_tag(url_for(@reply.reply_audio), controls: '') %>
+      </div>
+    <% end %>
+
+    <% if @reply.reply_file.present? %>
+      <div class="ui center aligned inverted segment">
+        <%= file_tag(url_for(@reply.reply_file), controls: '') %>
+      </div>
+    <% end %>
+
+    <% if student_logged_in? %>
+      <%= link_to "Back to your Dashboard", student_path(current_student), class: "ui primary button" %>
+      <%= link_to "Edit the interaction", edit_reply_path(@reply), class: "ui teal button" %>
+    <% end %>
+
+    <% if tutor_logged_in? %>
+      <div class>
+        <%= link_to "To the student's page", student_path("#{@reply.student.id}"), class: "ui primary button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

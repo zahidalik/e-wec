@@ -1,0 +1,41 @@
+<% if @reply.errors.any? %>
+  <div class="ui error message">
+    <i class="close icon"></i>
+    <div class="header">
+      <%= pluralize(@reply.errors.count, "error") %> prohibited your reply for the activity from being created:
+    </div>
+    <ul class="list">
+      <% @reply.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for @reply, html: { class: "ui form", role: 'form'} do |f| %>
+  <div class="ui very relaxed segment">
+    <div class="field">
+      <%= f.label :topic, "Topic" %>
+      <div class="ui left icon input">
+        <%= f.text_field :topic, placeholder: "Topic" %>
+        <i class="file icon"></i>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :reply %>
+    <%= f.rich_text_area :reply %>
+  </div>
+
+  <div class="ui two column grid">
+    <div class="ui column field">
+      <%= f.label :reply_audio, "If you want to upload any audio file" %>
+      <%= f.file_field :reply_audio %>
+    </div>
+    <div class="ui column field">
+      <%= f.label :reply_file, "If you want to uplaoad any other file" %>
+      <%= f.file_field :reply_file %>
+    </div>
+  </div>
+  <%= f.submit class: "ui green button" %>
+<% end %>

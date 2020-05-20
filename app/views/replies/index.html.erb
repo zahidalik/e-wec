@@ -1,0 +1,28 @@
+<h2 class="ui center aligned icon header">
+  <i class="orange globe icon"></i>
+   All replies by the students (in all classrooms and all subjects)
+</h2>
+
+<table class="ui teal table">
+  <thead>
+    <tr><th>Topic</th>
+    <th>Student</th>
+    <th>Class</th>
+    <th>Subject</th>
+    <th>Activity</th>
+    <th>Tutor</th>
+    <th>Date and Time</th>
+  </tr></thead><tbody>
+    <% @replies.each do |reply| %>
+    <tr>
+      <td><%= link_to reply.topic, reply_path(reply) %></td>
+      <td><%= reply.student.name %></td>
+      <td><%= reply.activity.classroom.standard.name %></td>
+      <td><%= reply.activity.classroom.subject.name %></td>
+      <td><%= reply.activity.topic %></td>
+      <td><%= reply.activity.classroom.tutor.name %></td>
+      <td><%= reply.created_at.strftime('%a, %d %b %Y') %>, <%= reply.created_at.localtime.strftime("%I:%M %p") %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

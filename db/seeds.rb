@@ -6,6 +6,4 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 Tutor.create!(name: 'Zahid', contact: '0623956661', address: 'Kibaha', password: 'zahid5')
-Student.create!(name: 'Shazan', contact: '0623956661', address: 'Kibaha', gender: 'Male', password: 'shazan5')
 Standard.create!(name: 'Form 1')
-Subject.create!(name: 'Islamic')

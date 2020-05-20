@@ -17,7 +17,7 @@
       <td><%= activity.classroom.tutor.name %></td>
       <td><%= activity.classroom.standard.name %></td>
       <td><%= activity.classroom.subject.name %></td>
-      <td><%= activity.created_at.httpdate %></td>
+      <td><%= activity.created_at.strftime('%a, %d %b %Y') %>, <%= activity.created_at.localtime.strftime("%I:%M %p") %></td>
     </tr>
     <% end %>
   </tbody>

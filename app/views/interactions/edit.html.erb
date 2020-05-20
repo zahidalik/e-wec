@@ -8,34 +8,23 @@
     </div>
 
     <div class="ui center aligned teal segment">
-      <button class="ui primary basic button"><strong>Topic: </strong><%= @lesson.topic %></button>
+      <button class="ui primary basic button"><strong>Topic: </strong><%= @interaction.lesson.topic %></button>
     </div>
     <div class="ui blue segment">
-      <%= @lesson.lesson %>
+      <%= @interaction.lesson.lesson %>
     </div>
 
-    <% if @lesson.video.present? %>
+    <% if @interaction.lesson.video.present? %>
       <div class="ui center aligned inverted segment">
-        <%= video_tag(url_for(@lesson.video), style: 'width:300px; height:200px', controls: '') %>
+        <%= video_tag(url_for(@lesson.video), style: 'width:600px; height:400px', controls: '') %>
       </div>
     <% end %>
 
-    <div class="ui two column grid">
-      <div class="ui column">
-        <% if @lesson.audio.present? %>
-          <div class="ui center aligned inverted segment">
-            <%= audio_tag(url_for(@lesson.audio), style: 'width:150px; height:45px', controls: '') %>
-          </div>
-        <% end %>
+    <% if @interaction.lesson.audio.present? %>
+      <div class="ui center aligned inverted segment">
+        <%= audio_tag(url_for(@lesson.audio), controls: '') %>
       </div>
-      <div class="ui column">
-        <% if @lesson.file.present? %>
-          <div class="ui center aligned inverted segment">
-            <%= file_tag(url_for(@lesson.file), style: 'width:150px; height:45px', controls: '') %>
-          </div>
-        <% end %>
-      </div>
-    </div>
+    <% end %>
   </div>
   <div class="column">
     <div>

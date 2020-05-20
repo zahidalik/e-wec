@@ -19,7 +19,7 @@
 </div>
 
 <%= form_for @activity, html: { class: "ui form", role: 'form'} do |f| %>
-  <div class="ui piled segment">
+  <div class="ui very relaxed segment">
     <div class="field">
       <%= f.label :topic, "Topic" %>
       <div class="ui left icon input">
@@ -28,21 +28,23 @@
       </div>
     </div>
   </div>
-  <div class="ui very padded segment">
+  <div class="field">
     <%= f.label :activity, "Activity" %>
     <%= f.rich_text_area :activity %>
   </div>
-  <div class="ui very relaxed segment">
-    <%= f.label :activity_video, "Activity related video" %>
-    <%= f.file_field :activity_video %>
+  <div class="ui three column grid">
+    <div class="ui column field">
+      <%= f.label :activity_video, "Activity related video" %>
+      <%= f.file_field :activity_video %>
+    </div>
+    <div class="ui column field">
+      <%= f.label :activity_audio, "Activity related audio file" %>
+      <%= f.file_field :activity_audio %>
+    </div>
+    <div class="ui column field">
+      <%= f.label :activity_file, "Activity related file" %>
+      <%= f.file_field :activity_file %>
+    </div>
   </div>
-  <div class="ui very relaxed segment">
-    <%= f.label :activity_audio, "Activity related audio file" %>
-    <%= f.file_field :activity_audio %>
-  </div>
-  <div class="ui very relaxed segment">
-    <%= f.label :activity_file, "Activity related file" %>
-    <%= f.file_field :activity_file %>
-  </div>
-    <%= f.submit class: "ui green button" %>
+  <%= f.submit class: "ui green button" %>
 <% end %>

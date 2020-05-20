@@ -1,0 +1,6 @@
+<div class="ui center aligned raised green segment">
+    <button class="ui primary basic button"><strong>Tutor's Name: </strong><%= @exam.classroom.tutor.name %></button>
+    <button class="ui primary basic button"><strong>Class: </strong><%= @exam.classroom.standard.name %></button>
+    <button class="ui primary basic button"><strong>Subject: </strong><%= @exam.classroom.subject.name %></button>
+</div>
+<%= render 'form' %>

@@ -1,0 +1,32 @@
+<% if tutor_logged_in? %>
+  <% if current_tutor.admin? %>
+    <h2 class="ui center aligned icon header">
+      <i class="orange globe icon"></i>
+       All answers posted till date (in all classrooms and all subjects)
+    </h2>
+
+    <table class="ui teal table">
+      <thead>
+        <tr><th>Topic</th>
+        <th>Subject</th>
+        <th>Class</th>
+        <th>Tutor</th>
+        <th>Exam Start</th>
+        <th>Exam End</th>
+        <th>Answer Submitted</th>
+      </tr></thead><tbody>
+        <% @answers.each do |answer| %>
+        <tr>
+          <td><%= link_to answer.exam.topic, answer_path(answer) %></td>
+          <td><%= answer.exam.classroom.subject.name %></td>
+          <td><%= answer.exam.classroom.standard.name %></td>
+          <td><%= answer.exam.classroom.tutor.name%></td>
+          <td><%= answer.exam.date.strftime('%a, %d %b %Y') %>, <%= answer.exam.date.localtime.strftime("%I:%M %p") %></td>
+          <td><%= answer.exam.end_date.strftime('%a, %d %b %Y') %>, <%= answer.exam.end_date.localtime.strftime("%I:%M %p") %></td>
+          <td><%= answer.created_at.strftime('%a, %d %b %Y') %>, <%= answer.exam.created_at.localtime.strftime("%I:%M %p") %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+<% end %>

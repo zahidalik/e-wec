@@ -1,0 +1,44 @@
+<% if @exam.errors.any? %>
+  <div class="ui error message">
+    <i class="close icon"></i>
+    <div class="header">
+      <%= pluralize(@exam.errors.count, "error") %> prohibited your exam from being created:
+    </div>
+    <ul class="list">
+      <% @exam.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for @exam, html: { class: "ui form", role: 'form'} do |f| %>
+  <div class="ui very relaxed segment">
+    <div class="field">
+      <%= f.label :topic, "Topic" %>
+      <div class="ui left icon input">
+        <%= f.text_field :topic, placeholder: "Topic" %>
+        <i class="file icon"></i>
+      </div>
+    </div>
+    <div class="ui two column grid">
+      <div class="ui column">
+        <div class="field">
+          <%= f.label :date, "Start Date & Time in GMT (-3 hours)" %>
+          <%= f.datetime_field :date %>
+        </div>
+      </div>
+      <div class="ui column">
+        <div class="field">
+          <%= f.label :end_date, "End Date & Time in GMT (-3 hours)" %>
+          <%= f.datetime_field :end_date %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :exam, "Question Paper" %>
+    <%= f.rich_text_area :exam %>
+  </div>
+    <%= f.submit class: "ui green button" %>
+<% end %>

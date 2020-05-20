@@ -17,16 +17,26 @@
   </div>
 <% end %>
 
-<% if @activity.activity_audio.present? %>
-  <div class="ui center aligned inverted segment">
-    <%= audio_tag(url_for(@activity.activity_audio), controls: '') %>
+<div class="ui two column grid">
+  <div class="ui column">
+    <% if @activity.activity_audio.present? %>
+      <div class="ui center aligned inverted segment">
+        <%= audio_tag(url_for(@activity.activity_audio), controls: '') %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+  <div class="ui column">
+    <% if @activity.activity_file.present? %>
+      <div class="ui center aligned inverted segment">
+        <%= file_tag(url_for(@activity.activity_file), controls: '') %>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-<% if @activity.activity_file.present? %>
-  <div class="ui center aligned inverted segment">
-    <%= file_tag(url_for(@activity.activity_file), controls: '') %>
-  </div>
+<% if student_logged_in? %>
+  <% session[:activity_id] = @activity.id %>
+  <%= link_to "Reply the activity", new_reply_path, class: "ui green button" %>
 <% end %>
 
 <% if tutor_logged_in? %>

@@ -1,9 +1,30 @@
-<h2 class="ui center aligned icon header">
-  <i class="circular orange desktop icon"></i>
-  <%= current_student.name %>&apos;s Activity Sheet
-  <div>
-    Class: <%= current_student.standards.last.name %>
-  </div>
-</h2>
+<div class="ui two column stackable grid">
+  <div class="column">
+    <div class="ui center aligned raised brown segment">
+      <button class="ui primary basic button"><strong>Tutor's Name: </strong><%= @exam.classroom.tutor.name %></button>
+      <button class="ui primary basic button"><strong>Class: </strong><%= @exam.classroom.standard.name %></button>
+      <button class="ui primary basic button"><strong>Subject: </strong><%= @exam.classroom.subject.name %></button>
+      <button class="ui primary basic button"><strong>Start: </strong><%= @exam.date.strftime('%a, %d %b %Y') %>, <%= @exam.date.localtime.strftime("%I:%M %p") %></button>
+      <button class="ui primary basic button"><strong>End: </strong><%= @exam.end_date.strftime('%a, %d %b %Y') %>, <%= @exam.end_date.localtime.strftime("%I:%M %p") %></button>
+    </div>
 
-<%= render 'form' %>
+    <div class="ui center aligned teal segment">
+      <button class="ui primary basic button"><strong>Topic: </strong><%= @exam.topic %></button>
+    </div>
+    <div class="ui blue segment">
+      <%= @exam.exam %>
+    </div>
+  </div>
+  <div class="column">
+    <div>
+      <div class="ui red message">Answer only once, otherwise you will be
+        disqualified</div>
+      <div class="ui green segment">
+        <h3 class="ui center aligned header">
+          <%= current_student.name %> your answer:
+        </h3>
+      </div>
+      <%= render 'form' %>
+    </div>
+  </div>
+</div>

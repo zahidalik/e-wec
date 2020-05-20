@@ -1,0 +1,23 @@
+<div class="ui center aligned raised segment">
+  <button class="ui brown basic button">Topic: <%= @exam.topic %></button>
+  <button class="ui teal basic button">Subject: <%= @exam.classroom.subject.name %></button>
+  <button class="ui primary basic button">Tutor: <%= @exam.classroom.tutor.name %></button>
+  <button class="ui primary basic button">Class: <%= @exam.classroom.standard.name %></button>
+  <button class="ui primary basic button">Start Date and Time: <%= @exam.date.strftime('%a, %d %b %Y') %>, <%= @exam.date.localtime.strftime("%I:%M %p") %></button>
+  <button class="ui primary basic button">End Date and Time: <%= @exam.end_date.strftime('%a, %d %b %Y') %>, <%= @exam.end_date.localtime.strftime("%I:%M %p") %></button>
+</div>
+
+<div class="ui segment">
+  <%= @exam.exam %>
+</div>
+
+<% if student_logged_in? %>
+  <% session[:exam_id] = @exam.id %>
+  <%= link_to "Answer", new_answer_path, class: "ui primay green fluid button" %>
+<% end %>
+
+<% if tutor_logged_in? %>
+  <div class>
+    <%= link_to "Edit Exam", edit_exam_path(@exam), class: "fluid ui primary button" %>
+  </div>
+<% end %>

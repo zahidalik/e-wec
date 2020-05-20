@@ -1,34 +1,75 @@
-<div class="ui center aligned raised segment">
-  <button class="ui primary basic button">Student: <%= @interaction.student.name %></button>
-  <button class="ui primary basic button">Class: <%= @interaction.student.standards.last.name %></button>
-  <button class="ui teal basic button">Subject: <%= @interaction.lesson.classroom.subject.name %></button>
-  <button class="ui brown basic button">Topic: <%= @interaction.topic %></button>
-  <button class="ui primary basic button">Created: <%= @interaction.created_at.httpdate %></button>
-  <button class="ui primary basic button">Updated: <%= @interaction.updated_at.httpdate %></button>
+<div class="ui two column stackable grid">
+  <div class="column">
+    <div class="ui center aligned raised brown segment">
+      <button class="ui primary basic button">Tutor: <%= @interaction.lesson.classroom.tutor.name %></button>
+      <button class="ui primary basic button">Class: <%= @interaction.lesson.classroom.standard.name %></button>
+      <button class="ui teal basic button">Subject: <%= @interaction.lesson.classroom.subject.name %></button>
+      <button class="ui brown basic button">Topic: <%= @interaction.lesson.topic %></button>
+      <button class="ui primary basic button">Created: <%= @interaction.lesson.created_at.strftime('%a, %d %b %Y') %></button>
+    </div>
+
+    <div class="ui blue segment">
+      <%= @interaction.lesson.lesson %>
+    </div>
+
+    <% if @interaction.lesson.video.present? %>
+      <div class="ui center aligned inverted segment">
+        <%= video_tag(url_for(@interaction.lesson.video), style: 'width:300px; height:200px', controls: '') %>
+      </div>
+    <% end %>
+
+    <div class="ui two column grid">
+      <div class="ui column">
+        <% if @interaction.lesson.audio.present? %>
+          <div class="ui center aligned inverted segment">
+            <%= audio_tag(url_for(@interaction.lesson.audio), style: 'width:150px; height:45px', controls: '') %>
+          </div>
+        <% end %>
+      </div>
+      <div class="ui column">
+        <% if @interaction.lesson.file.present? %>
+          <div class="ui center aligned inverted segment">
+            <%= file_tag(url_for(@interaction.lesson.file), style: 'width:150px; height:45px', controls: '') %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="ui center aligned raised green segment">
+      <button class="ui primary basic button">Student: <%= @interaction.student.name %></button>
+      <button class="ui primary basic button">Class: <%= @interaction.student.standards.last.name %></button>
+      <button class="ui teal basic button">Subject: <%= @interaction.lesson.classroom.subject.name %></button>
+      <button class="ui brown basic button">Topic: <%= @interaction.topic %></button>
+      <button class="ui primary basic button">Created: <%= @interaction.created_at.strftime('%a, %d %b %Y') %></button>
+      <button class="ui primary basic button">Updated: <%= @interaction.updated_at.strftime('%a, %d %b %Y') %></button>
+    </div>
+
+    <div class="ui teal segment">
+      <%= @interaction.interaction %>
+    </div>
+
+    <% if @interaction.interaction_audio.present? %>
+      <div class="ui center aligned inverted segment">
+        <%= audio_tag(url_for(@interaction.interaction_audio), controls: '') %>
+      </div>
+    <% end %>
+
+    <% if @interaction.interaction_file.present? %>
+      <div class="ui center aligned inverted segment">
+        <%= file_tag(url_for(@interaction.interaction_file), controls: '') %>
+      </div>
+    <% end %>
+
+    <% if student_logged_in? %>
+      <%= link_to "Back to your Dashboard", student_path(current_student), class: "ui primary button" %>
+      <%= link_to "Edit the interaction", edit_interaction_path(@interaction), class: "ui teal button" %>
+    <% end %>
+
+    <% if tutor_logged_in? %>
+      <div class>
+        <%= link_to "To the student's page", student_path("#{@interaction.student.id}"), class: "ui primary button" %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<div class="ui segment">
-  <%= @interaction.interaction %>
-</div>
-
-<% if @interaction.interaction_audio.present? %>
-  <div class="ui center aligned inverted segment">
-    <%= audio_tag(url_for(@interaction.interaction_audio), controls: '') %>
-  </div>
-<% end %>
-
-<% if @interaction.interaction_file.present? %>
-  <div class="ui center aligned inverted segment">
-    <%= file_tag(url_for(@interaction.interaction_file), controls: '') %>
-  </div>
-<% end %>
-
-<% if student_logged_in? %>
-  <%= link_to "Back to your Dashboard", student_path(current_student), class: "ui primary button" %>
-<% end %>
-
-<% if tutor_logged_in? %>
-  <div class>
-    <%= link_to "Back to the students page", student_path("#{@interaction.student.id}"), class: "ui primary button" %>
-  </div>
-<% end %>

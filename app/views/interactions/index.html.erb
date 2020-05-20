@@ -1,0 +1,28 @@
+<h2 class="ui center aligned icon header">
+  <i class="orange globe icon"></i>
+   All Interactions by the students (in all classrooms and all subjects)
+</h2>
+
+<table class="ui teal table">
+  <thead>
+    <tr><th>Topic</th>
+    <th>Student</th>
+    <th>Class</th>
+    <th>Subject</th>
+    <th>Lesson</th>
+    <th>Tutor</th>
+    <th>Date and Time</th>
+  </tr></thead><tbody>
+    <% @interactions.each do |interaction| %>
+    <tr>
+      <td><%= link_to interaction.topic, interaction_path(interaction) %></td>
+      <td><%= interaction.student.name %></td>
+      <td><%= interaction.lesson.classroom.standard.name %></td>
+      <td><%= interaction.lesson.classroom.subject.name %></td>
+      <td><%= interaction.lesson.topic %></td>
+      <td><%= interaction.lesson.classroom.tutor.name %></td>
+      <td><%= interaction.created_at.strftime('%a, %d %b %Y') %>, <%= interaction.created_at.localtime.strftime("%I:%M %p") %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

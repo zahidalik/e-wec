@@ -19,7 +19,7 @@
 </div>
 
 <%= form_for @lesson, html: { class: "ui form", role: 'form'} do |f| %>
-  <div class="ui piled segment">
+  <div class="ui very relaxed segment">
     <div class="field">
       <%= f.label :topic, "Topic" %>
       <div class="ui left icon input">
@@ -28,21 +28,23 @@
       </div>
     </div>
   </div>
-  <div class="ui very padded segment">
+  <div class="field">
     <%= f.label :lesson, "Lesson" %>
     <%= f.rich_text_area :lesson %>
   </div>
-  <div class="ui very relaxed segment">
-    <%= f.label :video, "Lesson related video" %>
-    <%= f.file_field :video %>
-  </div>
-  <div class="ui very relaxed segment">
-    <%= f.label :audio, "Lesson related audio file" %>
-    <%= f.file_field :audio %>
-  </div>
-  <div class="ui very relaxed segment">
-    <%= f.label :file, "Lesson related file" %>
-    <%= f.file_field :file %>
+  <div class="ui three column grid">
+    <div class="ui column field">
+      <%= f.label :video, "Lesson related video" %>
+      <%= f.file_field :video %>
+    </div>
+    <div class="ui column field">
+      <%= f.label :audio, "Lesson related audio file" %>
+      <%= f.file_field :audio %>
+    </div>
+    <div class="ui column field">
+      <%= f.label :file, "Lesson related file" %>
+      <%= f.file_field :file %>
+    </div>
   </div>
     <%= f.submit class: "ui green button" %>
 <% end %>

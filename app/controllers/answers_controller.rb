@@ -1,45 +1,56 @@
 class AnswersController < ApplicationController
-  before_action :set_answer, only: [:show, :edit, :update]
-  before_action :require_user, only: [:show]
-  before_action :require_student, except: [:show]
+  before_action :require_user
+  before_action :require_student, only: [:new, :create]
+  before_action :require_admin, only: [:destroy]
+
+  def index
+    @answers = Answer.all
+  end
 
   def show
+    @answer = Answer.find(params[:id])
   end
 
   def new
-    @answer = current_student.answers.build
+    @exam = Exam.find(session[:exam_id])
+    @answer = @exam.answers.build
   end
 
   def create
-    @answer = current_student.answers.build(answer_params)
+    @exam = Exam.find(session[:exam_id])
+    @answer = @exam.answers.build(answer_params)
+    @answer.student_id = current_student.id
+    @answer.submit_date_time = DateTime.current
 
-    if @answer.save
-      flash[:success] = "#{current_student.name} your answer was saved successfully"
-      redirect_to student_path(current_student)
+    if DateTime.current >= @exam.date && DateTime.current <= @exam.end_date
+      if @answer.save
+        flash[:success] = "Your answer was successfully saved"
+        redirect_to student_path(current_student)
+        session[:exam_id] = nil
+      else
+        render :new
+      end
     else
-      render :new
+      flash[:error] = "Sorry you could not submit your answer before the end date and time"
+      redirect_to student_path(current_student)
     end
   end
 
-  def edit
-  end
+  def destroy
+    @answer = Answer.find(params[:id])
 
-  def update
-    if @answer.update(answer_params)
-      flash[:success] = "#{current_student.name} your answer was edited successfully"
-      redirect_to student_path(current_student)
+    if @answer.destroy
+      flash[:success] = "Answer was successfully deleted"
+      redirect_to answers_path
     else
-      render :edit
+      flash[:error] = "Answer couldn't be deleted"
+      redirect_to answer_path(@answer)
     end
   end
 
   private
 
-  def set_answer
-    @answer = Answer.find(params[:id])
-  end
-
   def answer_params
-    params.require(:answer).permit(:subject, :topic, :answer)
+    params.require(:answer).permit(:exam)
   end
 end

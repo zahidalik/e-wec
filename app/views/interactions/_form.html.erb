@@ -13,7 +13,7 @@
 <% end %>
 
 <%= form_for @interaction, html: { class: "ui form", role: 'form'} do |f| %>
-  <div class="ui piled segment">
+  <div class="ui very relaxed segment">
     <div class="field">
       <%= f.label :topic, "Topic" %>
       <div class="ui left icon input">
@@ -22,17 +22,20 @@
       </div>
     </div>
   </div>
-  <div class="ui very relaxed segment">
+  <div class="field">
     <%= f.label :interaction %>
     <%= f.rich_text_area :interaction %>
   </div>
-  <div class="ui very relaxed segment">
-    <%= f.label :interaction_audio, "If you want to upload any audio file" %>
-    <%= f.file_field :interaction_audio %>
+
+  <div class="ui two column stackable grid">
+    <div class="ui column field">
+      <%= f.label :interaction_audio, "If you want to upload any audio file" %>
+      <%= f.file_field :interaction_audio %>
+    </div>
+    <div class="ui column field">
+      <%= f.label :interaction_file, "If you want to uplaoad any other file" %>
+      <%= f.file_field :interaction_file %>
+    </div>
   </div>
-  <div class="ui very relaxed segment">
-    <%= f.label :interaction_file, "If you want to uplaoad any other file" %>
-    <%= f.file_field :interaction_file %>
-  </div>
-    <%= f.submit class: "ui green button" %>
+  <%= f.submit class: "ui green button" %>
 <% end %>

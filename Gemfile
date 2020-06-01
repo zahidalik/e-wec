@@ -27,6 +27,13 @@ gem 'hirb'
 gem 'image_processing', '~> 1.2'
 gem 'semantic-ui-sass'
 
+gem 'rack-cors', '1.1.1'
+gem 'uglifier', '4.2.0'
+gem 'figaro', '1.1.1'
+gem 'json', '2.3.0'
+gem 'rails_real_favicon', '0.1.0'
+gem 'rest-client', '2.1.0'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 

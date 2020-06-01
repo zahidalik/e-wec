@@ -6,4 +6,5 @@ class Classroom < ApplicationRecord
   has_many :lessons
   has_many :activities
   has_many :exams
+  has_many :live_sessions
 end

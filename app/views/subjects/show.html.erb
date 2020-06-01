@@ -43,6 +43,24 @@
       </div>
     <% end %>
   </div>
+  <div class="ui raised center aligned segment">
+    <h3 class="ui center aligned teal header">Live Sessions</h3>
+    <% @subject_classrooms.each do |subject_classroom| %>
+      <div class="ui middle aligned large divided list">
+        <% subject_classroom.live_sessions.each do |live_session| %>
+          <div>
+            <% if live_session.start_date <= DateTime.current && live_session.end_date >= DateTime.current %>
+              <strong><%= link_to "Show chat room", live_session_path(live_session) %></strong>
+              <small>Start Date: <%= live_session.start_date.strftime('%a, %d %b %Y') %>
+                <u>time: <%= live_session.start_date.localtime.strftime("%I:%M %p") %></u>,
+                End date: <%= live_session.end_date.strftime('%a, %d %b %Y') %>
+                <u>time: <%= live_session.end_date.localtime.strftime("%I:%M %p") %></u></small>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <% if current_tutor.admin? %>
@@ -91,6 +109,22 @@
             <u>Class: <%= exam.classroom.standard.name %></u>
             <small>Created: <%= exam.created_at.strftime('%a, %d %b %Y') %></small>
             <strong>[<%= exam.classroom.tutor.name %>]</strong>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="ui raised center aligned segment">
+    <h3 class="ui center aligned teal header">Live Sessions</h3>
+    <% @subject_in_all_classrooms.each do |subject_classroom| %>
+      <div class="ui middle aligned large divided list">
+        <% subject_classroom.live_sessions.each do |live_session| %>
+          <div class="item">
+            <strong><%= link_to "Live session at #{live_session.start_date.strftime('%a, %d %b %Y')}", live_session_path(live_session) %></strong>
+            <u>Class: <%= live_session.classroom.standard.name %></u>
+            <strong>[<%= live_session.classroom.tutor.name %>]</strong>
+            <small>Start Date: <%= live_session.start_date.strftime('%a, %d %b %Y') %>, Start Time: <%= live_session.start_date.localtime.strftime("%I:%M %p") %></small>
+            <small>End Date: <%= live_session.start_date.strftime('%a, %d %b %Y') %>, End Time: <%= live_session.end_date.localtime.strftime("%I:%M %p") %> </small>
           </div>
         <% end %>
       </div>

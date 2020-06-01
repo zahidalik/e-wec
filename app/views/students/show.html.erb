@@ -22,10 +22,11 @@
       <a class="active item" data-tab="first">Lessons</a>
       <a class="item" data-tab="second">Activities</a>
       <a class="item" data-tab="third">Exams</a>
-      <a class="item" data-tab="fourth">Interactions</a>
-      <a class="item" data-tab="fifth">Replies</a>
-      <a class="item" data-tab="sixth">Answers</a>
-      <a class="item" data-tab="seventh">Profile</a>
+      <a class="item" data-tab="fourth">Live Sessions</a>
+      <a class="item" data-tab="fifth">Interactions</a>
+      <a class="item" data-tab="sixth">Replies</a>
+      <a class="item" data-tab="seventh">Answers</a>
+      <a class="item" data-tab="eighth">Profile</a>
     </div>
     <div class="ui bottom attached active tab segment" data-tab="first">
       <% @student_standard.classrooms.each do |student_classroom| %>
@@ -52,6 +53,20 @@
     </div>
 
     <div class="ui bottom attached tab segment" data-tab="fourth">
+      <% @student_standard.classrooms.each do |student_classroom| %>
+        <% student_classroom.live_sessions.each do |live_session| %>
+          <ul class="ui large celled list">
+            <% if live_session.start_date <= DateTime.current && live_session.end_date >= DateTime.current %>
+              <li><%= link_to "Show Live Session Room", live_session_path(live_session) %>
+                  (<%= live_session.classroom.subject.name %>) <small><%= live_session.start_date.strftime('%a, %d %b %Y') %>, <%= live_session.start_date.localtime.strftime("%I:%M %p") %></small>
+                  <small><%= live_session.end_date.strftime('%a, %d %b %Y') %>, <%= live_session.end_date.localtime.strftime("%I:%M %p") %></small></li>
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="ui bottom attached tab segment" data-tab="fifth">
       <% @student_interactions.each do |interaction| %>
         <ul class="ui large celled list">
           <li><%= link_to interaction.topic, interaction_path(interaction) %>
@@ -60,7 +75,7 @@
         </ul>
       <% end %>
     </div>
-    <div class="ui bottom attached tab segment" data-tab="fifth">
+    <div class="ui bottom attached tab segment" data-tab="sixth">
       <% @student_replies.each do |reply| %>
         <ul class="ui large celled list">
           <li><%= link_to reply.topic, reply_path(reply) %>
@@ -69,7 +84,7 @@
         </ul>
       <% end %>
     </div>
-    <div class="ui bottom attached tab segment" data-tab="sixth">
+    <div class="ui bottom attached tab segment" data-tab="seventh">
       <% @student.answers.each do |answer| %>
         <ul class="ui large celled list">
           <li><%= link_to answer.exam.topic, answer_path(answer) %>
@@ -79,7 +94,7 @@
       <% end %>
     </div>
   <% end %>
-  <div class="ui bottom attached tab segment" data-tab="seventh">
+  <div class="ui bottom attached tab segment" data-tab="eighth">
     <div class="ui large bulleted list">
       <div class="item">
         Name: <strong><%= @student.name %></strong>

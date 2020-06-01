@@ -18,4 +18,7 @@ Rails.application.routes.draw do
   resources :answers
   resources :interactions
   resources :replies
+  resources :live_sessions
+
+  mount ActionCable.server, at: '/cable'
 end

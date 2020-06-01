@@ -1,1 +1,17 @@
 @import "semantic-ui";
+
+#stop {
+  display: none;
+}
+
+#self-view {
+  float: left;
+  width: 320px;
+  height: 300px;
+}
+
+#remote-view {
+  float: right;
+  width: 600px;
+  height: 400px;
+}

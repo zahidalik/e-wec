@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery unless: -> { request.format.json? }
   helper_method :current_tutor, :current_student, :tutor_logged_in?, :student_logged_in?
 
   def current_tutor

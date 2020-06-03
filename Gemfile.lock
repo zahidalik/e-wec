@@ -166,6 +166,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.1.4)
     regexp_parser (1.7.0)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
@@ -259,6 +260,7 @@ DEPENDENCIES
   rack-cors (= 1.1.1)
   rails (~> 6.0.2, >= 6.0.2.2)
   rails_real_favicon (= 0.1.0)
+  redis (~> 4.0)
   rest-client (= 2.1.0)
   sass-rails (>= 6)
   selenium-webdriver

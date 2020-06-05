@@ -40,6 +40,6 @@ class LiveSessionsController < ApplicationController
   private
 
   def live_session_broadcast_params
-    params.permit(:live_session, :type, :from, :to, :sdp, :candidate)
+    params.permit(:type, :from, :to, :sdp, :candidate)
   end
 end

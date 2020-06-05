@@ -20,7 +20,6 @@ class AnswersController < ApplicationController
     @exam = Exam.find(session[:exam_id])
     @answer = @exam.answers.build(answer_params)
     @answer.student_id = current_student.id
-    @answer.submit_date_time = DateTime.current
 
     if DateTime.current >= @exam.date && DateTime.current <= @exam.end_date
       if @answer.save
@@ -51,6 +50,6 @@ class AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:exam)
+    params.require(:answer).permit(:answer)
   end
 end

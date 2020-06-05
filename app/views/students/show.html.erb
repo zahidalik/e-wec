@@ -53,17 +53,7 @@
     </div>
 
     <div class="ui bottom attached tab segment" data-tab="fourth">
-      <% @student_standard.classrooms.each do |student_classroom| %>
-        <% student_classroom.live_sessions.each do |live_session| %>
-          <ul class="ui large celled list">
-            <% if live_session.start_date <= DateTime.current && live_session.end_date >= DateTime.current %>
-              <li><%= link_to "Show Live Session Room", live_session_path(live_session) %>
-                  (<%= live_session.classroom.subject.name %>) <small><%= live_session.start_date.strftime('%a, %d %b %Y') %>, <%= live_session.start_date.localtime.strftime("%I:%M %p") %></small>
-                  <small><%= live_session.end_date.strftime('%a, %d %b %Y') %>, <%= live_session.end_date.localtime.strftime("%I:%M %p") %></small></li>
-            <% end %>
-          </ul>
-        <% end %>
-      <% end %>
+      No live session for you
     </div>
 
     <div class="ui bottom attached tab segment" data-tab="fifth">

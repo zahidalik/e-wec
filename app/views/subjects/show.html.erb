@@ -45,21 +45,7 @@
   </div>
   <div class="ui raised center aligned segment">
     <h3 class="ui center aligned teal header">Live Sessions</h3>
-    <% @subject_classrooms.each do |subject_classroom| %>
-      <div class="ui middle aligned large divided list">
-        <% subject_classroom.live_sessions.each do |live_session| %>
-          <div>
-            <% if live_session.start_date <= DateTime.current && live_session.end_date >= DateTime.current %>
-              <strong><%= link_to "Show chat room", live_session_path(live_session) %></strong>
-              <small>Start Date: <%= live_session.start_date.strftime('%a, %d %b %Y') %>
-                <u>time: <%= live_session.start_date.localtime.strftime("%I:%M %p") %></u>,
-                End date: <%= live_session.end_date.strftime('%a, %d %b %Y') %>
-                <u>time: <%= live_session.end_date.localtime.strftime("%I:%M %p") %></u></small>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+    No live session
   </div>
 <% end %>
 

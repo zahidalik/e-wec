@@ -21,7 +21,7 @@ Rails.application.configure do
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
-
+  # config.public_file_server.enabled = false
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
 
@@ -42,6 +42,7 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
+  config.action_cable.allowed_request_origins = [ 'http://192.168.43.14/' ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -54,8 +55,8 @@ Rails.application.configure do
   config.log_tags = [ :request_id ]
 
   # Use a different cache store in production.
-  config.cache_store = :redis_store if ENV['REDIS_URL']
-
+  # config.cache_store = :redis_cache_store, {url: "redis://192.168.43.14:6379/1"}
+  config.cache_store = :redis_cache_store, {url: "redis://192.168.43.14:6379/1"}
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "e_wec_app_production"

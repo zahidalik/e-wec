@@ -5,4 +5,6 @@ class Reply < ApplicationRecord
   has_rich_text :reply
   has_one_attached :reply_audio
   has_one_attached :reply_file
+
+  validates :topic, presence: true
 end

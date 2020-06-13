@@ -26,7 +26,7 @@
     <div class="ui top attached tabular menu">
       <a class="active item" data-tab="first">Classes</a>
       <a class="item" data-tab="second">Subjects</a>
-      <a class="item" data-tab="third">Lessons/Activities/Exams/Live Sessions</a>
+      <a class="item" data-tab="third">Lessons/Activities/Exams</a>
       <a class="item" data-tab="fourth">Your Profile</a>
     </div>
     <div class="ui bottom attached active tab segment" data-tab="first">
@@ -48,7 +48,7 @@
     </div>
     <div class="ui bottom attached tab segment" data-tab="third">
       <%= link_to classrooms_path do %>
-        <i class="ui edit icon"></i> Lessons/Activities/Exams/Live Sessions
+        <i class="ui edit icon"></i> Lessons/Activities/Exams
       <% end %>
     </div>
     <div class="ui bottom attached tab segment" data-tab="fourth">
@@ -109,9 +109,6 @@
       <% end %>
       <%= link_to answers_path, class: "item" do %>
         <i class="clipboard icon"></i> Answers
-      <% end %>
-      <%= link_to live_sessions_path, class: "item" do %>
-        <i class="play icon"></i> Live Sessions
       <% end %>
     </div>
     <div class="ui compact menu">

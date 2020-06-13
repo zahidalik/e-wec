@@ -26,7 +26,8 @@
 
     <% if @reply.activity.activity_file.present? %>
       <div class="ui center aligned inverted segment">
-        <%= file_tag(url_for(@reply.activity.activity_file), controls: '') %>
+        <%= link_to "Download the file", (url_for(@reply.activity.activity_file)),
+            class: "ui small primary button" %>
       </div>
     <% end %>
   </div>

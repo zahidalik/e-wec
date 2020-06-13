@@ -29,7 +29,8 @@
       <div class="ui column">
         <% if @interaction.lesson.file.present? %>
           <div class="ui center aligned inverted segment">
-            <%= file_tag(url_for(@interaction.lesson.file), style: 'width:150px; height:45px', controls: '') %>
+            <%= link_to "Download the file", (url_for(@interaction.lesson.file)),
+                class: "ui small primary button" %>
           </div>
         <% end %>
       </div>
@@ -57,7 +58,8 @@
 
     <% if @interaction.interaction_file.present? %>
       <div class="ui center aligned inverted segment">
-        <%= file_tag(url_for(@interaction.interaction_file), controls: '') %>
+        <%= link_to "Download the file", (url_for(@interaction.interaction_file)),
+            class: "ui small primary button" %>
       </div>
     <% end %>
 

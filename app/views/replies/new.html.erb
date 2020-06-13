@@ -31,7 +31,8 @@
       <div class="ui column">
         <% if @activity.activity_file.present? %>
           <div class="ui center aligned inverted segment">
-            <%= audio_tag(url_for(@activity.activity_file), style: 'width:150px; height:45px', controls: '') %>
+            <%= link_to "Download the file", (url_for(@activity.activity_file)),
+                class: "ui small primary button" %>
           </div>
         <% end %>
       </div>

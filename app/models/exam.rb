@@ -3,4 +3,6 @@ class Exam < ApplicationRecord
   has_many :answers
 
   has_rich_text :exam
+
+  validates :topic, presence: true
 end

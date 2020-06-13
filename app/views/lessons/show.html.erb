@@ -28,7 +28,7 @@
   <div class="column">
     <% if @lesson.file.present? %>
       <div class="ui center aligned inverted segment">
-        <%= file_tag(url_for(@lesson.file), controls: '') %>
+        <%= link_to "Download the file", (url_for(@lesson.file)), class: "ui small primary button" %>
       </div>
     <% end %>
   </div>

@@ -1,24 +1,19 @@
-# README
+# E WEC App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Currently we are facing a new challenge that the humanity has never faced before. Whole globe is adhering to social distancing policies. Many schools are not functioning physically.
 
-Things you may want to cover:
+This app is a small step towards creating a virtual environment for tutors and students.
 
-* Ruby version
+I have created it to help my educational institution.
 
-* System dependencies
+As per our needs, I have created this app very easy to use. It is just meant to prove a supplementary for our day to day classroom activities and work.
 
-* Configuration
+# My first ever App
 
-* Database creation
+This is my first ever app in Ruby on Rails.
 
-* Database initialization
+Hope to continue serve better in future.
 
-* How to run the test suite
+# WebRTC App
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+I am going to make another app for having live sessions between our teachers and the students. That will support the current app.
